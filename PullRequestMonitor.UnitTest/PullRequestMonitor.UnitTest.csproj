@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{40A732E7-9973-43F9-85CB-781057C522D7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PullRequestMonitor.UnitTest</RootNamespace>
+    <AssemblyName>PullRequestMonitor.UnitTest</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <Import Project="..\vsprops\PullRequestMonitor.props" />
+  <ItemGroup>
+    <None Include="app.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="project.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PullRequestMonitor\PullRequestMonitor.csproj">
+      <Project>{5ef4173d-f021-4e44-b1cb-cf06f6844379}</Project>
+      <Name>PullRequestMonitor</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApplicationActionsTest.cs" />
+    <Compile Include="Exceptions\CommonExceptionExamples.cs" />
+    <Compile Include="ViewModel\DelegateCommandTest.cs" />
+    <Compile Include="Factories\TfProjectCollectionCacheTest.cs" />
+    <Compile Include="Model\MonitorSettingsTest.cs" />
+    <Compile Include="Model\MonitorTest.cs" />
+    <Compile Include="Model\NameRegexpRepositoryFilterTest.cs" />
+    <Compile Include="Model\PullRequestTest.cs" />
+    <Compile Include="Model\TfGitRepositoryTest.cs" />
+    <Compile Include="Model\TfProjectTest.cs" />
+    <Compile Include="Model\MonitoredProjectSettingsTest.cs" />
+    <Compile Include="Model\TfProjectCollectionTest.cs" />
+    <Compile Include="Model\TrayIconTest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TfsConnectionTest.cs" />
+    <Compile Include="ViewModel\CouldNotReachServerViewModelTest.cs" />
+    <Compile Include="ViewModel\CountToIconConverterTest.cs" />
+    <Compile Include="ViewModel\DateTimeToHumanFriendlyStringConverterTest.cs" />
+    <Compile Include="ViewModel\FirstUpdateViewModelTest.cs" />
+    <Compile Include="ViewModel\MonitorWindowViewModelTest.cs" />
+    <Compile Include="ViewModel\NoProjectsViewModelTest.cs" />
+    <Compile Include="ViewModel\ProjectViewModelTest.cs" />
+    <Compile Include="ViewModel\PullRequestListViewModelTest.cs" />
+    <Compile Include="ViewModel\PullRequestViewModelTest.cs" />
+    <Compile Include="ViewModel\RepositoryViewModelTest.cs" />
+    <Compile Include="ViewModel\SettingsViewModelTest.cs" />
+    <Compile Include="ViewModel\SingleProjectViewModelTest.cs" />
+    <Compile Include="ViewModel\TrayIconViewModelTest.cs" />
+    <Compile Include="ViewModel\UnrecognisedErrorViewModelTest.cs" />
+    <Compile Include="View\MonitorWindowTest.cs" />
+    <Compile Include="View\SettingsWindowTest.cs" />
+    <Compile Include="WindsorInstallerTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="WindsorInstallerTest.CheckNonPublicConstructors.approved.txt" />
+    <Content Include="WindsorInstallerTest.CheckPotentiallyMisconfiguredComponents.approved.txt" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,21 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:tb="http://www.hardcodet.net/taskbar"
+                    xmlns:vm="clr-namespace:PullRequestMonitor.ViewModel">
+
+    <ContextMenu x:Shared="false" x:Key="SystemTrayIconMenu">
+        <MenuItem Header="Settings..." Command="{Binding ShowSettingsCommand}" />
+        <Separator />
+        <MenuItem Header="Exit" Command="{Binding ExitApplicationCommand}" />
+    </ContextMenu>
+
+    <vm:CountToIconConverter x:Key="Converter"/>
+
+    <tb:TaskbarIcon x:Key="TrayIcon"
+                    IconSource="{Binding PullRequestCount, Converter={StaticResource Converter}}"
+                    ToolTipText="{Binding TooltipText}"
+                    LeftClickCommand="{Binding ShowMonitorWindowCommand}"
+                    NoLeftClickDelay="True"
+                    ContextMenu="{StaticResource SystemTrayIconMenu}">
+    </tb:TaskbarIcon>
+</ResourceDictionary>

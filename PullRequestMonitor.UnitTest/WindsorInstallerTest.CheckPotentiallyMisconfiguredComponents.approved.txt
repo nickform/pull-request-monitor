@@ -1,0 +1,17 @@
+﻿
+'PullRequestMonitor.Model.NameRegexpRepositoryFilter' is waiting for the following dependencies:
+- Parameter 'repoNamePattern' which was not provided. Did you forget to set the dependency?
+
+'PullRequestMonitor.Model.PullRequest' is waiting for the following dependencies:
+- Service 'Microsoft.TeamFoundation.SourceControl.WebApi.GitPullRequest' which was not registered.
+- Parameter 'serverUri' which was not provided. Did you forget to set the dependency?
+- Service 'PullRequestMonitor.Model.TfGitRepository' which was registered but is also waiting for dependencies.
+'PullRequestMonitor.Model.TfGitRepository' is waiting for the following dependencies:
+- Service 'Microsoft.TeamFoundation.SourceControl.WebApi.GitRepository' which was not registered.
+- Service 'PullRequestMonitor.Model.TfProject' which was registered but is also waiting for dependencies.
+'PullRequestMonitor.Model.TfProject' is waiting for the following dependencies:
+- Service 'Microsoft.TeamFoundation.Core.WebApi.TeamProjectReference' which was not registered.
+- Service 'PullRequestMonitor.Model.ITfsConnection' which was not registered.
+
+'PullRequestMonitor.Model.TfProjectCollection' is waiting for the following dependencies:
+- Parameter 'uri' which was not provided. Did you forget to set the dependency?

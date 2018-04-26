@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <ProjectGuid>{5EF4173D-F021-4E44-B1CB-CF06F6844379}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PullRequestMonitor</RootNamespace>
+    <AssemblyName>PullRequestMonitor</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkProfile />
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <Import Project="..\vsprops\PullRequestMonitor.props" />
+  <ItemGroup>
+    <None Include="project.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="ApplicationActions.cs" />
+    <Compile Include="Exceptions\ExceptionClassifiers.cs" />
+    <Compile Include="Factories\IGitHttpClientFactory.cs" />
+    <Compile Include="Factories\INameRegexpRepositoryFilterFactory.cs" />
+    <Compile Include="Factories\ITfGitRepositoryFactory.cs" />
+    <Compile Include="Factories\ITfProjectCollectionFactory.cs" />
+    <Compile Include="Factories\TfProjectCollectionCache.cs" />
+    <Compile Include="Model\VstsServerURL.cs" />
+    <Compile Include="Model\IAppSettings.cs" />
+    <Compile Include="Model\IRepositoryFilter.cs" />
+    <Compile Include="Model\MonitorSettings.cs" />
+    <Compile Include="AppSettings.cs" />
+    <Compile Include="Model\NameRegexpRepositoryFilter.cs" />
+    <Compile Include="Model\NullTeamProjectCollection.cs" />
+    <Compile Include="Model\RetrievalStatus.cs" />
+    <Compile Include="Model\TfGitRepository.cs" />
+    <Compile Include="Model\ITfsConnection.cs" />
+    <Compile Include="Model\TfProjectCollection.cs" />
+    <Compile Include="Properties\FriendAssemblies.cs" />
+    <Compile Include="Factories\ITfProjectFactory.cs" />
+    <Compile Include="Factories\ITfsConnectionFactory.cs" />
+    <Compile Include="Factories\ITrayIconFactory.cs" />
+    <Compile Include="Factories\IMonitorViewModelFactory.cs" />
+    <Compile Include="Model\PullRequest.cs" />
+    <Compile Include="Factories\IPullRequestFactory.cs" />
+    <Compile Include="Model\TfProject.cs" />
+    <Compile Include="Model\MonitoredProjectSettings.cs" />
+    <Compile Include="Services\FileLogger.cs" />
+    <Compile Include="Services\ILogger.cs" />
+    <Compile Include="TfsConnection.cs" />
+    <Compile Include="ViewModel\CouldNotReachServerViewModel.cs" />
+    <Compile Include="ViewModel\CountToIconConverter.cs" />
+    <Compile Include="ViewModel\DateTimeToHumanFriendlyStringConverter.cs" />
+    <Compile Include="ViewModel\FirstUpdateViewModel.cs" />
+    <Compile Include="ViewModel\IUpdateable.cs" />
+    <Compile Include="ViewModel\MonitorWindowViewModel.cs" />
+    <Compile Include="Factories\ITrayIconViewModelFactory.cs" />
+    <Compile Include="Model\Monitor.cs" />
+    <Compile Include="Model\TrayIcon.cs" />
+    <Compile Include="ViewModel\NoProjectsViewModel.cs" />
+    <Compile Include="ViewModel\PullRequestListViewModel.cs" />
+    <Compile Include="ViewModel\PullRequestViewModel.cs" />
+    <Compile Include="ViewModel\RepositoryViewModel.cs" />
+    <Compile Include="ViewModel\SettingsViewModel.cs" />
+    <Compile Include="ViewModel\SingleProjectViewModel.cs" />
+    <Compile Include="ViewModel\ProjectViewModel.cs" />
+    <Compile Include="ViewModel\UnrecognisedErrorViewModel.cs" />
+    <Compile Include="View\CouldNotReachServerView.xaml.cs">
+      <DependentUpon>CouldNotReachServerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\FirstUpdateView.xaml.cs">
+      <DependentUpon>FirstUpdateView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UnrecognisedErrorView.xaml.cs">
+      <DependentUpon>UnrecognisedErrorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\NoProjectsView.xaml.cs">
+      <DependentUpon>NoProjectsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PullRequestListView.xaml.cs">
+      <DependentUpon>PullRequestListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PullRequestView.xaml.cs">
+      <DependentUpon>PullRequestView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SingleProjectView.xaml.cs">
+      <DependentUpon>SingleProjectView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WindsorInstaller.cs" />
+    <Page Include="View\CouldNotReachServerView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\MonitorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\FirstUpdateView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\UnrecognisedErrorView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\NoProjectsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PullRequestListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PullRequestView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SettingsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModel\DelegateCommand.cs" />
+    <Compile Include="ViewModel\TrayIconViewModel.cs" />
+    <Compile Include="View\MonitorWindow.xaml.cs">
+      <DependentUpon>MonitorWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SettingsWindow.xaml.cs">
+      <DependentUpon>SettingsWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="View\SingleProjectView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TrayIconResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\zero.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\one.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\eight.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\five.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\four.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\nineplus.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\seven.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\six.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\three.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\two.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\unknown.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

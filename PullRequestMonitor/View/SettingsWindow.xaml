@@ -1,0 +1,87 @@
+﻿<Window x:Class="PullRequestMonitor.View.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Pull request monitor"
+        Height="450"
+        MinHeight="450"
+        Width="410"
+        MinWidth="410"
+        WindowStartupLocation="CenterScreen"
+        Closing="SettingsWindow_OnClosing"
+        MouseDown="SettingsWindow_OnMouseDown">
+    <Grid Margin="3">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0" Padding="5">VSTS Account:</TextBlock>
+            <StackPanel Grid.Row="0" Grid.Column="1" Margin="0 0 5 0" Orientation="Horizontal">
+                <TextBlock Padding="0 5 1 5">https://</TextBlock>
+                <TextBox Name="vstsAccountTextBox" Width="80" VerticalAlignment="Center"
+                         Padding="0 0 2 0" TextAlignment="Right" 
+                         Text="{Binding Mode=TwoWay, Path=VstsAccount}"/>
+                <TextBlock Padding="1 5">.VisualStudio.com</TextBlock>
+            </StackPanel>
+
+            <TextBlock Grid.Row="1" Padding="5">Project:</TextBlock>
+            <ComboBox Grid.Row="1" Grid.Column="1" Margin="0 3 5 3"
+                      IsEditable="True" TextSearch.TextPath="ProjectName"
+                      ItemsSource="{Binding Path=Projects}" SelectedItem="{Binding Mode=TwoWay, Path=SelectedProject}"
+                      IsEnabled="{Binding Mode=OneWay, Path=HasProjects}"
+                      MaxDropDownHeight="250">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Path=ProjectName}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
+            <TextBlock Grid.Row="2" Padding="5">Repository name pattern:</TextBlock>
+            <StackPanel Grid.Row="2" Grid.Column="1" Margin="0 0 5 0" Orientation="Horizontal"
+                         IsEnabled="{Binding Mode=OneWay, Path=HasSelectedProject}">
+                <TextBox Name="repoNamePatternTextBox" Width="140" VerticalAlignment="Center" Padding="0 0 2 0" TextAlignment="Right"
+                         Text="{Binding Mode=TwoWay, Path=RepoNamePattern, UpdateSourceTrigger=Explicit}" />
+                <TextBlock Padding="1 5">(.git)*</TextBlock>
+            </StackPanel>
+        </Grid>
+
+        <Separator Grid.Row="1" Margin="5 10 5 10" />
+
+        <TextBlock Grid.Row="2" Padding="5" IsEnabled="{Binding Mode=OneWay, Path=HasSelectedProject}">
+            Pull request monitor will show active pull requests in these repositories:
+        </TextBlock>
+
+        <ListView Grid.Row="3" Margin="5" ItemsSource="{Binding Path=SelectedProject.Repositories}"
+                  IsEnabled="{Binding Mode=OneWay, Path=HasSelectedProject}">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Focusable" Value="false" />
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Path=Name}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Window>

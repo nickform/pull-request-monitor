@@ -1,0 +1,17 @@
+﻿{
+  "dependencies": {
+    "Castle.Windsor": "3.3.0",
+    "Hardcodet.NotifyIcon.Wpf": "1.0.*",
+    "Humanizer": "2.2.0",
+    "log4net": "2.0.8",
+    "Microsoft.TeamFoundationServer.Client": "15.112.1",
+    "Microsoft.VisualStudio.Services.InteractiveClient": "15.112.1"
+  },
+  "frameworks": {
+    "net461": {}
+  },
+  "runtimes": {
+    "win": {},
+    "win-anycpu": {}
+  }
+}
