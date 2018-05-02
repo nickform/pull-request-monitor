@@ -7,8 +7,8 @@
         Title="Pull request monitor"
         Height="450"
         MinHeight="450"
-        Width="410"
-        MinWidth="410"
+        Width="430"
+        MinWidth="430"
         WindowStartupLocation="CenterScreen"
         Closing="SettingsWindow_OnClosing"
         MouseDown="SettingsWindow_OnMouseDown">
@@ -36,7 +36,7 @@
             <TextBlock Grid.Row="0" Padding="5">VSTS Account:</TextBlock>
             <StackPanel Grid.Row="0" Grid.Column="1" Margin="0 0 5 0" Orientation="Horizontal">
                 <TextBlock Padding="0 5 1 5">https://</TextBlock>
-                <TextBox Name="vstsAccountTextBox" Width="80" VerticalAlignment="Center"
+                <TextBox Name="vstsAccountTextBox" Width="120" VerticalAlignment="Center"
                          Padding="0 0 2 0" TextAlignment="Right" 
                          Text="{Binding Mode=TwoWay, Path=VstsAccount}"/>
                 <TextBlock Padding="1 5">.VisualStudio.com</TextBlock>
