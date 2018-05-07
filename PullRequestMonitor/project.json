@@ -5,7 +5,8 @@
     "Humanizer": "2.2.0",
     "log4net": "2.0.8",
     "Microsoft.TeamFoundationServer.Client": "15.112.1",
-    "Microsoft.VisualStudio.Services.InteractiveClient": "15.112.1"
+    "Microsoft.VisualStudio.Services.InteractiveClient": "15.112.1",
+    "squirrel.windows": "1.8.0"
   },
   "frameworks": {
     "net461": {}
