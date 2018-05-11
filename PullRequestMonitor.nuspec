@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>PullRequestMonitor</id>
+    <title>Pull Request Monitor</title>
+    <version>0.1.0</version>
+    <authors>Nick Form</authors>
+    <licenseUrl>https://github.com/nickform/pull-request-monitor/blob/master/LICENCE.md</licenseUrl>
+    <projectUrl>https://github.com/nickform/pull-request-monitor</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A Windows system tray app for watching VSTS pull requests.</description>
+    <copyright>Copyright 2018</copyright>
+  </metadata>
+  <files>
+    <file src="bin\Release\PullRequestMonitor.exe" target="lib\net45\"></file>
+    <file src="bin\Release\PullRequestMonitor.exe.config" target="lib\net45\"></file>
+    <file src="bin\Release\Castle.Core.dll" target="lib\net45\"></file>
+    <file src="bin\Release\Castle.Windsor.dll" target="lib\net45\"></file>
+    <file src="bin\Release\DeltaCompressionDotNet.*" target="lib\net45\"></file>
+    <file src="bin\Release\Hardcodet.Wpf.TaskbarNotification.dll" target="lib\net45\"></file>
+    <file src="bin\Release\Humanizer.dll" target="lib\net45\"></file>
+    <file src="bin\Release\log4net.dll" target="lib\net45\"></file>
+    <file src="bin\Release\Microsoft.TeamFoundation.Core.WebApi.dll" target="lib\net45\"></file>
+    <file src="bin\Release\Microsoft.TeamFoundation.SourceControl.WebApi.dll" target="lib\net45\"></file>
+    <file src="bin\Release\Microsoft.VisualStudio.Services.Client.Interactive.dll" target="lib\net45\"></file>
+    <file src="bin\Release\Microsoft.VisualStudio.Services.Common.dll" target="lib\net45\"></file>
+    <file src="bin\Release\Microsoft.VisualStudio.Services.WebApi.dll" target="lib\net45\"></file>
+    <file src="bin\Release\Mono.Cecil.*" target="lib\net45\"></file>
+    <file src="bin\Release\Newtonsoft.Json.dll" target="lib\net45\"></file>
+    <file src="bin\Release\Nuget.Squirrel.dll" target="lib\net45\"></file>
+    <file src="bin\Release\SharpCompress.dll" target="lib\net45\"></file>
+    <file src="bin\Release\Splat.dll" target="lib\net45\"></file>
+    <file src="bin\Release\Squirrel.dll" target="lib\net45\"></file>
+    <file src="bin\Release\System.Net.Http.dll" target="lib\net45\"></file>
+    <file src="bin\Release\System.Net.Http.Formatting.dll" target="lib\net45\"></file>
+  </files>
+</package>

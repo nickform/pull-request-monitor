@@ -126,6 +126,15 @@ namespace PullRequestMonitor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to C:\Users\NForm\git\misc\pull-request-monitor\Releases.
+        /// </summary>
+        public static string SquirrelUrlOrPath {
+            get {
+                return ResourceManager.GetString("SquirrelUrlOrPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Int32 similar to 25.
         /// </summary>
         public static int TfsServer_Timeout_Seconds {
