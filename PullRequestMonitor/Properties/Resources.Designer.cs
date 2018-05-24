@@ -126,7 +126,7 @@ namespace PullRequestMonitor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to C:\Users\NForm\git\misc\pull-request-monitor\Releases.
+        ///   Looks up a localized string similar to https://github.com/nickform/pull-request-monitor.
         /// </summary>
         public static string SquirrelUrlOrPath {
             get {

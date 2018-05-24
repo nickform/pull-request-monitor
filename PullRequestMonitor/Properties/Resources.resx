@@ -148,6 +148,6 @@ Have you added valid credentials to Windows credential manager? </value>
     <value>Check that you can open the link below in a web browser.</value>
   </data>
   <data name="SquirrelUrlOrPath" xml:space="preserve">
-    <value>C:\Users\NForm\git\misc\pull-request-monitor\Releases</value>
+    <value>https://github.com/nickform/pull-request-monitor</value>
   </data>
 </root>

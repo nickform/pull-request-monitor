@@ -46,7 +46,7 @@ namespace PullRequestMonitor
             {
                 try
                 {
-                    mgr.CreateShortcutsForExecutable(ExeName(), ShortcutLocations, false);
+                    mgr.Result.CreateShortcutsForExecutable(ExeName(), ShortcutLocations, false);
                     _logger.Info($"{nameof(App)}: returned cleanly from call to CreateShortcutsForExecutable");
                 }
                 catch (System.Exception e)
@@ -61,7 +61,7 @@ namespace PullRequestMonitor
             _logger.Info($"{nameof(App)}: received call to {nameof(AppUpdate)} with {version}");
             using (var mgr = GetUpdateManager())
             {
-                mgr.CreateShortcutsForExecutable(ExeName(), ShortcutLocations, true);
+                mgr.Result.CreateShortcutsForExecutable(ExeName(), ShortcutLocations, true);
             }
         }
 
@@ -70,7 +70,7 @@ namespace PullRequestMonitor
             _logger.Info($"{nameof(App)}: received call to {nameof(AppUninstall)} with {version}");
             using (var mgr = GetUpdateManager())
             {
-                mgr.RemoveShortcutsForExecutable(ExeName(), ShortcutLocations);
+                mgr.Result.RemoveShortcutsForExecutable(ExeName(), ShortcutLocations);
             }
         }
 
@@ -103,7 +103,7 @@ namespace PullRequestMonitor
                 try
                 {
                     _logger.Info($"{nameof(App)}: attempting to update...");
-                    var version = await mgr.UpdateApp();
+                    var version = await mgr.Result.UpdateApp();
                     _logger.Info($"{nameof(App)}: UpdateManager returned version {version}");
                 }
                 catch (Exception e)
@@ -113,9 +113,9 @@ namespace PullRequestMonitor
             }
         }
 
-        private static UpdateManager GetUpdateManager()
+        private static Task<UpdateManager> GetUpdateManager()
         {
-            return new UpdateManager(PullRequestMonitor.Properties.Resources.SquirrelUrlOrPath);
+            return UpdateManager.GitHubUpdateManager(PullRequestMonitor.Properties.Resources.SquirrelUrlOrPath);
         }
 
         private static string ExeName()
