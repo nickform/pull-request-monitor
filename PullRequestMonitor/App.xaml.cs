@@ -42,17 +42,17 @@ namespace PullRequestMonitor
         private void InitialInstall(Version version)
         {
             _logger.Info($"{nameof(App)}: received call to {nameof(InitialInstall)} with {version}");
-            using (var mgr = GetUpdateManager())
+            try
             {
-                try
+                using (var mgr = GetUpdateManager())
                 {
-                    mgr.Result.CreateShortcutsForExecutable(ExeName(), ShortcutLocations, false);
+                    mgr.CreateShortcutsForExecutable(ExeName(), ShortcutLocations, false);
                     _logger.Info($"{nameof(App)}: returned cleanly from call to CreateShortcutsForExecutable");
                 }
-                catch (System.Exception e)
-                {
-                    _logger.Error($"{nameof(App)}: failed to create shortcuts due to an exception", e);
-                }
+            }
+            catch (Exception e)
+            {
+                _logger.Error($"{nameof(App)}: failed to create shortcuts due to an exception", e);
             }
         }
 
@@ -61,7 +61,7 @@ namespace PullRequestMonitor
             _logger.Info($"{nameof(App)}: received call to {nameof(AppUpdate)} with {version}");
             using (var mgr = GetUpdateManager())
             {
-                mgr.Result.CreateShortcutsForExecutable(ExeName(), ShortcutLocations, true);
+                mgr.CreateShortcutsForExecutable(ExeName(), ShortcutLocations, true);
             }
         }
 
@@ -70,7 +70,7 @@ namespace PullRequestMonitor
             _logger.Info($"{nameof(App)}: received call to {nameof(AppUninstall)} with {version}");
             using (var mgr = GetUpdateManager())
             {
-                mgr.Result.RemoveShortcutsForExecutable(ExeName(), ShortcutLocations);
+                mgr.RemoveShortcutsForExecutable(ExeName(), ShortcutLocations);
             }
         }
 
@@ -98,24 +98,26 @@ namespace PullRequestMonitor
 
         private async void Update()
         {
-            using (var mgr = GetUpdateManager())
+            try
             {
-                try
+                using (var mgr = GetUpdateManager())
                 {
-                    _logger.Info($"{nameof(App)}: attempting to update...");
-                    var version = await mgr.Result.UpdateApp();
-                    _logger.Info($"{nameof(App)}: UpdateManager returned version {version}");
+                        _logger.Info($"{nameof(App)}: attempting to update...");
+                        var version = await mgr.UpdateApp();
+                        _logger.Info($"{nameof(App)}: UpdateManager returned version {version}");
                 }
-                catch (Exception e)
-                {
-                    _logger.Error($"{nameof(App)}: failed to update app due to exception:", e);
-                }
+            }
+            catch (Exception e)
+            {
+                _logger.Error($"{nameof(App)}: failed to update app due to exception:", e);
             }
         }
 
-        private static Task<UpdateManager> GetUpdateManager()
+        private static UpdateManager GetUpdateManager()
         {
-            return UpdateManager.GitHubUpdateManager(PullRequestMonitor.Properties.Resources.SquirrelUrlOrPath);
+            var gitHubUpdateManager = UpdateManager.GitHubUpdateManager(PullRequestMonitor.Properties.Resources.SquirrelUrlOrPath);
+            gitHubUpdateManager.Wait();
+            return gitHubUpdateManager.Result;
         }
 
         private static string ExeName()
