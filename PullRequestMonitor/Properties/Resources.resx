@@ -147,4 +147,7 @@ Have you added valid credentials to Windows credential manager? </value>
   <data name="CouldNotReachServerSuggestion" xml:space="preserve">
     <value>Check that you can open the link below in a web browser.</value>
   </data>
+  <data name="SquirrelUrlOrPath" xml:space="preserve">
+    <value>https://github.com/nickform/pull-request-monitor</value>
+  </data>
 </root>

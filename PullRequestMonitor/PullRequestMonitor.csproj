@@ -13,6 +13,9 @@
     <TargetFrameworkProfile />
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\pulley.ico</ApplicationIcon>
+  </PropertyGroup>
   <Import Project="..\vsprops\PullRequestMonitor.props" />
   <ItemGroup>
     <None Include="project.json" />
@@ -183,44 +186,33 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\unknown.ico" />
     <Resource Include="Resources\zero.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\one.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\eight.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\five.ico" />
-  </ItemGroup>
-  <ItemGroup>
+    <Resource Include="Resources\two.ico" />
+    <Resource Include="Resources\three.ico" />
     <Resource Include="Resources\four.ico" />
-  </ItemGroup>
-  <ItemGroup>
+    <Resource Include="Resources\five.ico" />
+    <Resource Include="Resources\six.ico" />
+    <Resource Include="Resources\seven.ico" />
+    <Resource Include="Resources\eight.ico" />
     <Resource Include="Resources\nineplus.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\seven.ico" />
+    <SquirrelDebugDependencies Include="Update.exe">
+      <InProject>false</InProject>
+    </SquirrelDebugDependencies>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\six.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\three.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\two.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\unknown.ico" />
+    <Resource Include="Resources\pulley.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
+-->
   <Target Name="AfterBuild">
+    <Copy SourceFiles="@(SquirrelDebugDependencies)" DestinationFolder="$(SolutionDir)\bin" />
   </Target>
-  -->
 </Project>
