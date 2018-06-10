@@ -102,9 +102,14 @@ namespace PullRequestMonitor
             {
                 using (var mgr = GetUpdateManager())
                 {
-                        _logger.Info($"{nameof(App)}: attempting to update...");
-                        var version = await mgr.UpdateApp();
-                        _logger.Info($"{nameof(App)}: UpdateManager returned version {version}");
+                    _logger.Info($"{nameof(App)}: attempting to update from current version ({mgr.CurrentlyInstalledVersion(ExeName())})...");
+                    var version = await mgr.UpdateApp();
+                    if (version == null)
+                    {
+                        _logger.Info($"{nameof(App)}: UpdateManager found no newer version");
+                    } else {
+                        _logger.Info($"{nameof(App)}: UpdateManager returned version {version.Version}");
+                    }
                 }
             }
             catch (Exception e)
