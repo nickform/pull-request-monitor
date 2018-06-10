@@ -11,7 +11,7 @@
         <viewModel:DateTimeToHumanFriendlyStringConverter x:Key="DateTimeToHumanFriendly"/>
     </UserControl.Resources>
     
-    <Grid Height="Auto" Background="LightBlue" MouseLeftButtonDown="UIElement_OnMouseLeftButtonDown">
+    <Grid Height="Auto" Background="Transparent" MouseLeftButtonDown="UIElement_OnMouseLeftButtonDown">
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
