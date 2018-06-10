@@ -13,6 +13,9 @@
     <TargetFrameworkProfile />
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\pulley.ico</ApplicationIcon>
+  </PropertyGroup>
   <Import Project="..\vsprops\PullRequestMonitor.props" />
   <ItemGroup>
     <None Include="project.json" />
@@ -200,6 +203,9 @@
       <InProject>false</InProject>
     </SquirrelDebugDependencies>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\pulley.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
@@ -207,9 +213,6 @@
   </Target>
 -->
   <Target Name="AfterBuild">
-    <Copy
-        SourceFiles="@(SquirrelDebugDependencies)"
-        DestinationFolder="$(SolutionDir)\bin"
-    />
+    <Copy SourceFiles="@(SquirrelDebugDependencies)" DestinationFolder="$(SolutionDir)\bin" />
   </Target>
 </Project>
