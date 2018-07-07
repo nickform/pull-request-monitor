@@ -19,6 +19,9 @@
     <file src="bin\Release\Hardcodet.Wpf.TaskbarNotification.dll" target="lib\net45\"></file>
     <file src="bin\Release\Humanizer.dll" target="lib\net45\"></file>
     <file src="bin\Release\log4net.dll" target="lib\net45\"></file>
+    <file src="bin\Release\Microsoft.Data.Edm.dll" target="lib\net45\"></file>
+    <file src="bin\Release\Microsoft.Data.OData.dll" target="lib\net45\"></file>
+    <file src="bin\Release\Microsoft.Data.Services.Client.dll" target="lib\net45\"></file>
     <file src="bin\Release\Microsoft.IdentityModel.Clients.ActiveDirectory.dll" target="lib\net45\"></file>
     <file src="bin\Release\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll" target="lib\net45\"></file>
     <file src="bin\Release\Microsoft.TeamFoundation.Core.WebApi.dll" target="lib\net45\"></file>

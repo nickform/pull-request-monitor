@@ -5,6 +5,15 @@ namespace PullRequestMonitor
 {
     public class AppSettings : IAppSettings
     {
+        public AppSettings()
+        {
+            if (Properties.Settings.Default.VstsAccount == "")
+            {
+                Properties.Settings.Default.Upgrade();
+                Properties.Settings.Default.Save();
+            }
+        }
+
         public event EventHandler SettingsChanged;
         public string VstsAccount
         {
@@ -14,6 +23,9 @@ namespace PullRequestMonitor
                 if (value == Properties.Settings.Default.VstsAccount) return;
 
                 Properties.Settings.Default.VstsAccount = value;
+                // Reset other repo-locating settings on change of account.
+                Properties.Settings.Default.ProjectId = Guid.Empty;
+                Properties.Settings.Default.RepoNamePattern = ".*";
                 Save();
             }
         }
@@ -35,9 +47,10 @@ namespace PullRequestMonitor
             get => Properties.Settings.Default.RepoNamePattern;
             set
             {
+                if (value == Properties.Settings.Default.RepoNamePattern) return;
+
                 Properties.Settings.Default.RepoNamePattern = value;
-                Properties.Settings.Default.Save();
-                OnSettingsChanged();
+                Save();
             }
         }
         public int PollIntervalSeconds => Properties.Settings.Default.PollIntervalSeconds;
