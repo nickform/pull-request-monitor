@@ -14,4 +14,6 @@ Pull request monitor sits in your system tray continuously displaying the count 
 
 ## How to install and run
 
-[TODO]
+Download and run Setup.exe from the [latest release](https://github.com/nickform/pull-request-monitor/releases/latest). Unfortunately due to the lack of a code signing certificate for building the installer, Windows Defender Smartscreen on Windows 10, or maybe similar tools on older Windows versions, will pop-up, warning you about the risk of running an "unrecognized app". Click "More info" then "Run anyway".
+
+![Windows Defender Smartscreen](WindowsDefenderSmartscreen.png)
