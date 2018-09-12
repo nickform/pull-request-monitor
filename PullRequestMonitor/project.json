@@ -1,12 +1,12 @@
 ﻿{
   "dependencies": {
-    "Brutal.Dev.StrongNameSigner": "2.1.4",
-    "Castle.Windsor": "3.3.0",
-    "Hardcodet.NotifyIcon.Wpf": "1.0.*",
-    "Humanizer": "2.2.0",
+    "Brutal.Dev.StrongNameSigner": "2.3.0",
+    "Castle.Windsor": "4.1.0",
+    "Hardcodet.NotifyIcon.Wpf": "1.0.8",
+    "Humanizer": "2.4.2",
     "log4net": "2.0.8",
-    "Microsoft.Data.OData": "5.6.1",
-    "Microsoft.Data.Services.Client": "5.6.1",
+    "Microsoft.Data.OData": "5.8.4",
+    "Microsoft.Data.Services.Client": "5.8.4",
     "Microsoft.TeamFoundationServer.Client": "15.112.1",
     "Microsoft.VisualStudio.Services.InteractiveClient": "15.112.1",
     "squirrel.windows": "1.8.0"
