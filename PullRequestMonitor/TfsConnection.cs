@@ -25,6 +25,12 @@ namespace PullRequestMonitor
             Status = PullRequestStatus.Active
         };
 
+        private static readonly GitPullRequestSearchCriteria CompletedPullRequestSearchCriteria = new GitPullRequestSearchCriteria
+        {
+            IncludeLinks = true,
+            Status = PullRequestStatus.Completed
+        };
+
         public TfsConnection(VssConnection serverConnection, IPullRequestFactory pullRequestFactory, ITfProjectFactory tfProjectFactory, ITfGitRepositoryFactory repositoryFactory)
         {
             _serverConnection = serverConnection;
@@ -66,10 +72,20 @@ namespace PullRequestMonitor
 
         public Task<IEnumerable<IPullRequest>> GetActivePullRequestsInProject(ITfProject project)
         {
+            return PullRequestsInProject(project, ActivePullRequestSearchCriteria);
+        }
+
+        public Task<IEnumerable<IPullRequest>> GetCompletedPullRequestsInProject(ITfProject project)
+        {
+            return PullRequestsInProject(project, CompletedPullRequestSearchCriteria);
+        }
+
+        private Task<IEnumerable<IPullRequest>> PullRequestsInProject(ITfProject project, GitPullRequestSearchCriteria pullRequestSearchCriteria)
+        {
             var task = Task.Run(() =>
             {
                 var getPullRequestsTask = _gitHttpClient.Value.GetPullRequestsByProjectAsync(project.Id,
-                    ActivePullRequestSearchCriteria);
+                    pullRequestSearchCriteria);
 
                 getPullRequestsTask.Wait();
 

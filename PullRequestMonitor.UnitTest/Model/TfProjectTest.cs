@@ -377,6 +377,19 @@ namespace PullRequestMonitor.UnitTest.Model
         }
 
         [Test, TestCaseSource(nameof(PullRequestCountCases))]
+        public void TestCompletedPullRequestCount_ReturnCompletedCount(int numCompletedPullRequests)
+        {
+            var systemUnderTest = new TfProject(new TeamProject(), _tfsConnection, _logger);
+
+            for (int i = 0; i < numCompletedPullRequests; i++)
+            {
+                systemUnderTest.Completed.AddOrUpdate(i, Substitute.For<IPullRequest>(), (id, request) => request);
+            }
+
+            Assert.That(systemUnderTest.CompletedPullRequestCount, Is.EqualTo(numCompletedPullRequests));
+        }
+
+        [Test, TestCaseSource(nameof(PullRequestCountCases))]
         public void TestUnapprovedPullRequestCount_ReturnsUnapprovedCount(int numUnapprovedPullRequests)
         {
             var systemUnderTest = new TfProject(new TeamProject(), _tfsConnection, _logger);

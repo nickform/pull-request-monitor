@@ -8,6 +8,7 @@ namespace PullRequestMonitor.Model
         Task<IEnumerable<ITfProject>> GetProjects();
         Task<IEnumerable<ITfGitRepository>> GetRepositoriesInProject(ITfProject project);
         Task<IEnumerable<IPullRequest>> GetActivePullRequestsInProject(ITfProject project);
+        Task<IEnumerable<IPullRequest>> GetCompletedPullRequestsInProject(ITfProject project);
         void ReleasePullRequest(IPullRequest pullRequest);
     }
 }

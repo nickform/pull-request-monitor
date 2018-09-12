@@ -42,6 +42,7 @@
     <Compile Include="Factories\ITfGitRepositoryFactory.cs" />
     <Compile Include="Factories\ITfProjectCollectionFactory.cs" />
     <Compile Include="Factories\TfProjectCollectionCache.cs" />
+    <Compile Include="Model\ITfProject.cs" />
     <Compile Include="Model\VstsServerURL.cs" />
     <Compile Include="Model\IAppSettings.cs" />
     <Compile Include="Model\IRepositoryFilter.cs" />

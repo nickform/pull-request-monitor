@@ -9,6 +9,7 @@
     <Grid Height="450">
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
@@ -20,6 +21,14 @@
                 <TextBlock Margin="5 2 5 2">Approved:</TextBlock>
                 <local:PullRequestListView Margin="5" DataContext="{Binding Approved}"/>
             </StackPanel>
+        </ScrollViewer>
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+            <Expander IsExpanded="True">
+                <StackPanel Orientation="Vertical" Height="Auto">
+                  <TextBlock Margin="5 2 5 2">Completed:</TextBlock>
+                  <local:PullRequestListView Margin="5" DataContext="{Binding Completed}"/>
+                </StackPanel>
+            </Expander>
         </ScrollViewer>
     </Grid>
 </UserControl>

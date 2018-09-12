@@ -15,12 +15,13 @@ namespace PullRequestMonitor.UnitTest.ViewModel
         {
             _tfProject.Approved.Returns(new ConcurrentDictionary<int, IPullRequest>());
             _tfProject.Unapproved.Returns(new ConcurrentDictionary<int, IPullRequest>());
+            _tfProject.Completed.Returns(new ConcurrentDictionary<int, IPullRequest>());
         }
 
         [Test]
         public void TestApproved_ForNewInstance_IsNotNull()
         {
-            var systemUnderTest = new SingleProjectViewModel(new PullRequestListViewModel(), new PullRequestListViewModel());
+            var systemUnderTest = new SingleProjectViewModel(new PullRequestListViewModel(), new PullRequestListViewModel(), new PullRequestListViewModel());
 
             Assert.That(systemUnderTest.Approved, Is.Not.Null);
         }
@@ -29,7 +30,7 @@ namespace PullRequestMonitor.UnitTest.ViewModel
         [Test]
         public void TestApprovalNeeded_ForNewInstance_IsNotNull()
         {
-            var systemUnderTest = new SingleProjectViewModel(new PullRequestListViewModel(), new PullRequestListViewModel());
+            var systemUnderTest = new SingleProjectViewModel(new PullRequestListViewModel(), new PullRequestListViewModel(), new PullRequestListViewModel());
 
             Assert.That(systemUnderTest.Unapproved, Is.Not.Null);
         }
