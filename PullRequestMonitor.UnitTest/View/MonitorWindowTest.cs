@@ -34,6 +34,7 @@ namespace PullRequestMonitor.UnitTest.View
                 var project = Substitute.For<ITfProject>();
                 project.Unapproved.Returns(gitPullRequests);
                 project.Approved.Returns(gitPullRequests);
+                project.Completed.Returns(gitPullRequests);
 
                 var singleProjectViewModel = new SingleProjectViewModel(new PullRequestListViewModel(), new PullRequestListViewModel(), new PullRequestDescendingListViewModel());
 
