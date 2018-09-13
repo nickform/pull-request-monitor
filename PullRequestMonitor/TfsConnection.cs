@@ -78,6 +78,8 @@ namespace PullRequestMonitor
         public Task<IEnumerable<IPullRequest>> GetCompletedPullRequestsInProject(ITfProject project)
         {
             return PullRequestsInProject(project, CompletedPullRequestSearchCriteria);
+           // IOrderedEnumerable<IPullRequest> thing2 = thing.Result.OrderByDescending(x => x.Created.Date);
+           //return Task.FromResult((IEnumerable<IPullRequest>) thing2);
         }
 
         private Task<IEnumerable<IPullRequest>> PullRequestsInProject(ITfProject project, GitPullRequestSearchCriteria pullRequestSearchCriteria)
@@ -95,7 +97,7 @@ namespace PullRequestMonitor
                     var repo = project.Repositories.FirstOrDefault(rep => rep.Id == pullRequest.Repository.Id) ??
                                _repositoryFactory.Create(pullRequest.Repository, project);
 
-                    result.Insert(0, _pullRequestFactory.Create(pullRequest, _serverConnection.Uri.AbsoluteUri, repo));
+                    result.Add(_pullRequestFactory.Create(pullRequest, _serverConnection.Uri.AbsoluteUri, repo));
                 }
 
                 return result.AsEnumerable();

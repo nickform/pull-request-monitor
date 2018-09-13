@@ -35,7 +35,7 @@ namespace PullRequestMonitor.UnitTest.View
                 project.Unapproved.Returns(gitPullRequests);
                 project.Approved.Returns(gitPullRequests);
 
-                var singleProjectViewModel = new SingleProjectViewModel(new PullRequestListViewModel(), new PullRequestListViewModel(), new PullRequestListViewModel());
+                var singleProjectViewModel = new SingleProjectViewModel(new PullRequestListViewModel(), new PullRequestListViewModel(), new PullRequestDescendingListViewModel());
 
                 var monitor = Substitute.For<IMonitor>();
                 monitor.Projects.Returns(new[] { project });

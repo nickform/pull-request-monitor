@@ -377,7 +377,7 @@ namespace PullRequestMonitor.UnitTest.Model
         }
 
         [Test, TestCaseSource(nameof(PullRequestCountCases))]
-        public void TestCompletedPullRequestCount_ReturnCompletedCount(int numCompletedPullRequests)
+        public void TestCompletedPullRequestCount_ReturnsCompletedCount(int numCompletedPullRequests)
         {
             var systemUnderTest = new TfProject(new TeamProject(), _tfsConnection, _logger);
 
