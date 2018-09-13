@@ -95,7 +95,7 @@ namespace PullRequestMonitor
                     var repo = project.Repositories.FirstOrDefault(rep => rep.Id == pullRequest.Repository.Id) ??
                                _repositoryFactory.Create(pullRequest.Repository, project);
 
-                    result.Add(_pullRequestFactory.Create(pullRequest, _serverConnection.Uri.AbsoluteUri, repo));
+                    result.Insert(0, _pullRequestFactory.Create(pullRequest, _serverConnection.Uri.AbsoluteUri, repo));
                 }
 
                 return result.AsEnumerable();
