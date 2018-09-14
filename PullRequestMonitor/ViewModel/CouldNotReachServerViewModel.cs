@@ -3,7 +3,7 @@ using PullRequestMonitor.Model;
 
 namespace PullRequestMonitor.ViewModel
 {
-    internal sealed class CouldNotReachServerViewModel : IUpdateable
+    public sealed class CouldNotReachServerViewModel : IUpdateable
     {
         private readonly IApplicationActions _applicationActions;
         private readonly IAppSettings _settings;

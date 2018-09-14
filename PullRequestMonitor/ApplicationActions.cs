@@ -16,7 +16,7 @@ namespace PullRequestMonitor
         void UpdateMonitorViewModel();
     }
 
-    internal sealed class ApplicationActions : IApplicationActions
+    public sealed class ApplicationActions : IApplicationActions
     {
         private readonly IMonitor _monitor;
         private readonly MonitorWindow _monitorWindow;

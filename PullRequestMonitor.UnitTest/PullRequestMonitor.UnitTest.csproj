@@ -47,6 +47,7 @@
     <Compile Include="ViewModel\MonitorWindowViewModelTest.cs" />
     <Compile Include="ViewModel\NoProjectsViewModelTest.cs" />
     <Compile Include="ViewModel\ProjectViewModelTest.cs" />
+    <Compile Include="ViewModel\PullRequestDescendingListViewModelTest.cs" />
     <Compile Include="ViewModel\PullRequestListViewModelTest.cs" />
     <Compile Include="ViewModel\PullRequestViewModelTest.cs" />
     <Compile Include="ViewModel\RepositoryViewModelTest.cs" />

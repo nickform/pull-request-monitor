@@ -10,27 +10,7 @@ using PullRequestMonitor.Services;
 
 namespace PullRequestMonitor.Model
 {
-    /// <summary>
-    /// Represents a TFS project.
-    /// </summary>
-    public interface ITfProject
-    {
-        Guid Id { get; }
-        string Name { get; }
-        Task RetrievePullRequests();
-        RetrievalStatus PullRequestRetrievalStatus { get; }
-        ConcurrentDictionary<int, IPullRequest> Approved { get; }
-        ConcurrentDictionary<int, IPullRequest> Unapproved { get; }
-        int ApprovedPullRequestCount { get; }
-        int UnapprovedPullRequestCount { get; }
-        Task RetrieveRepositories();
-        RetrievalStatus RepositoryRetrievalStatus { get; }
-        IEnumerable<ITfGitRepository> Repositories { get; }
-        IRepositoryFilter RepositoryFilter { get; set; }
-        event EventHandler RepositoriesUpdated;
-    }
-
-    internal sealed class TfProject : ITfProject
+    public sealed class TfProject : ITfProject
     {
         private readonly TeamProjectReference _projectReference;
         private readonly ITfsConnection _tfsConnection;
@@ -46,6 +26,7 @@ namespace PullRequestMonitor.Model
 
             Approved = new ConcurrentDictionary<int, IPullRequest>();
             Unapproved = new ConcurrentDictionary<int, IPullRequest>();
+            Completed = new ConcurrentDictionary<int, IPullRequest>();
             _repositories = new List<ITfGitRepository>();
         }
 
@@ -62,8 +43,10 @@ namespace PullRequestMonitor.Model
         public RetrievalStatus PullRequestRetrievalStatus { get; private set; }
         public ConcurrentDictionary<int, IPullRequest> Approved { get; }
         public ConcurrentDictionary<int, IPullRequest> Unapproved { get; }
+        public ConcurrentDictionary<int, IPullRequest> Completed { get; }
         public int ApprovedPullRequestCount => Approved.Count;
         public int UnapprovedPullRequestCount => Unapproved.Count;
+        public int CompletedPullRequestCount => Completed.Count;
 
         public Task RetrieveRepositories()
         {
@@ -115,11 +98,14 @@ namespace PullRequestMonitor.Model
             try
             {
                 var getPRsTask = _tfsConnection.GetActivePullRequestsInProject(this);
+                var getCompletedPullRequestsTask = _tfsConnection.GetCompletedPullRequestsInProject(this);
 
                 getPRsTask.Wait();
+                getCompletedPullRequestsTask.Wait();
 
                 var activePullRequestIds = EnsureActivePrsArePresent(getPRsTask.Result);
                 RemoveStalePullRequests(activePullRequestIds);
+                EnsureCompletedPrsArePresent(getCompletedPullRequestsTask.Result);
             }
             catch (AggregateException ae)
             {
@@ -206,6 +192,25 @@ namespace PullRequestMonitor.Model
             }
 
             return activePullRequestIds;
+        }
+
+        /// <summary>
+        /// Adds any of the supplied <c>IPullRequest</c> in <paramref name="completedPullRequests"/> in repositories
+        /// matching the current repository filter to the <c>Approved</c> or <c>Unapproved</c> dictionaries.
+        /// </summary>
+        /// <param name="completedPullRequests">The currently active pull requests in the project based on the most
+        /// recent update from the server.</param>
+        /// <returns>The subset of <paramref name="completedPullRequests"/> which were added to one of the dictionaries.</returns>
+        public void EnsureCompletedPrsArePresent(IEnumerable<IPullRequest> completedPullRequests)
+        {
+            foreach (var pullRequest in completedPullRequests.Where(pr => IncludeRepo(pr.Repository)))
+            {
+                Completed.AddOrUpdate(pullRequest.Id, pullRequest, (i, existingValue) =>
+                {
+                    _tfsConnection.ReleasePullRequest(existingValue);
+                    return pullRequest;
+                });
+            }
         }
 
         /// <summary>

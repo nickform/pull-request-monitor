@@ -30,6 +30,7 @@ namespace PullRequestMonitor
                 Component.For<INoProjectsViewModel>().ImplementedBy<NoProjectsViewModel>(),
                 Component.For<SingleProjectViewModel>(),
                 Component.For<PullRequestListViewModel>().LifestyleTransient(),
+                Component.For<PullRequestDescendingListViewModel>().LifestyleTransient(),
                 Component.For<IAppSettings>().ImplementedBy<AppSettings>(),
                 Component.For<IMonitorSettings>().ImplementedBy<MonitorSettings>(),
                 Component.For<SettingsViewModel>(),

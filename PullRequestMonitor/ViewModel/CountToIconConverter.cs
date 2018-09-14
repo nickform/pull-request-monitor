@@ -5,7 +5,7 @@ using System.Windows.Media.Imaging;
 
 namespace PullRequestMonitor.ViewModel
 {
-    internal sealed class CountToIconConverter : IValueConverter
+    public sealed class CountToIconConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
