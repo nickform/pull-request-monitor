@@ -5,7 +5,7 @@ using PullRequestMonitor.Model;
 
 namespace PullRequestMonitor.ViewModel
 {
-    internal sealed class PullRequestListViewModel : IPullRequestListViewModel
+    public sealed class PullRequestListViewModel : IPullRequestListViewModel
     {
         public PullRequestListViewModel()
         {

@@ -2,7 +2,7 @@
 
 namespace PullRequestMonitor.ViewModel
 {
-    internal sealed class SingleProjectViewModel : IUpdateable
+    public sealed class SingleProjectViewModel : IUpdateable
     {
         public SingleProjectViewModel(PullRequestListViewModel unapproved, PullRequestListViewModel approved, PullRequestDescendingListViewModel completed)
         {

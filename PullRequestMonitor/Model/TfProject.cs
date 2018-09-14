@@ -10,7 +10,7 @@ using PullRequestMonitor.Services;
 
 namespace PullRequestMonitor.Model
 {
-    internal sealed class TfProject : ITfProject
+    public sealed class TfProject : ITfProject
     {
         private readonly TeamProjectReference _projectReference;
         private readonly ITfsConnection _tfsConnection;

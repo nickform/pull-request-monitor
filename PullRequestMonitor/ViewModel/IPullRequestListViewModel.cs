@@ -3,7 +3,7 @@ using PullRequestMonitor.Model;
 
 namespace PullRequestMonitor.ViewModel
 {
-    internal interface IPullRequestListViewModel
+    public interface IPullRequestListViewModel
     {
         ConcurrentDictionary<int, IPullRequest> Model { get; set; }
 

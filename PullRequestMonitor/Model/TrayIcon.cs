@@ -13,7 +13,7 @@ namespace PullRequestMonitor.Model
         MonitorStatus MonitorStatus { get; }
     }
 
-    internal sealed class TrayIcon : ITrayIcon
+    public sealed class TrayIcon : ITrayIcon
     {
         private readonly IMonitor _monitor;
 

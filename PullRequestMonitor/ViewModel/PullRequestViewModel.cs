@@ -3,7 +3,7 @@ using PullRequestMonitor.Model;
 
 namespace PullRequestMonitor.ViewModel
 {
-    internal sealed class PullRequestViewModel
+    public sealed class PullRequestViewModel
     {
         private readonly IPullRequest _model;
 

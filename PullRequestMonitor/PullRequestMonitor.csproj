@@ -54,7 +54,6 @@
     <Compile Include="Model\TfGitRepository.cs" />
     <Compile Include="Model\ITfsConnection.cs" />
     <Compile Include="Model\TfProjectCollection.cs" />
-    <Compile Include="Properties\FriendAssemblies.cs" />
     <Compile Include="Factories\ITfProjectFactory.cs" />
     <Compile Include="Factories\ITfsConnectionFactory.cs" />
     <Compile Include="Factories\ITrayIconFactory.cs" />

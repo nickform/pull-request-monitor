@@ -7,7 +7,7 @@ namespace PullRequestMonitor.ViewModel
         ICommand ShowSettingsCommand { get; }
     }
 
-    internal sealed class NoProjectsViewModel : INoProjectsViewModel
+    public sealed class NoProjectsViewModel : INoProjectsViewModel
     {
         private readonly IApplicationActions _applicationActions;
 

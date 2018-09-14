@@ -5,7 +5,7 @@ using PullRequestMonitor.Model;
 
 namespace PullRequestMonitor.ViewModel
 {
-    internal sealed class MonitorWindowViewModel : IUpdateable, INotifyPropertyChanged
+    public sealed class MonitorWindowViewModel : IUpdateable, INotifyPropertyChanged
     {
         private readonly IMonitor _model;
         private readonly INoProjectsViewModel _noProjectsViewModel;
