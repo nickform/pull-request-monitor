@@ -19,5 +19,6 @@ namespace PullRequestMonitor.ViewModel
         public Uri WebViewUri => _model.WebViewUri;
         public DateTime Created => _model.Created;
         public DateTime? Completed => _model.Completed;
+        public bool IsCompleted => _model.Completed != null;
     }
 }

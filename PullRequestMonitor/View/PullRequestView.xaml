@@ -31,7 +31,30 @@
         <TextBlock Grid.Row="1" Grid.Column="0" TextTrimming="CharacterEllipsis" Margin="2">
             <Run Text="{Binding Mode=OneTime, Path=Author}" />
             <Run Text=","/>
-            <Run Text="{Binding Mode=OneTime, Path=Created, Converter={StaticResource DateTimeToHumanFriendly}}" />
+            <Run>
+                <Run.Style>
+                    <Style TargetType="Run">
+                        <Setter Property="Text" Value="opened"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=IsCompleted}" Value="True">
+                                <Setter Property="Text" Value="completed"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Run.Style>
+            </Run>
+            <Run>
+                <Run.Style>
+                    <Style TargetType="Run">
+                        <Setter Property="Text" Value="{Binding Mode=OneTime, Path=Created, Converter={StaticResource DateTimeToHumanFriendly}}"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsCompleted}" Value="True">
+                                <Setter Property="Text" Value="{Binding Mode=OneTime, Path=Completed, Converter={StaticResource DateTimeToHumanFriendly}}"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Run.Style>
+            </Run>
             <Run Text="in"/>
             <Run Text="{Binding Mode=OneTime, Path=Repository}" />
         </TextBlock>
