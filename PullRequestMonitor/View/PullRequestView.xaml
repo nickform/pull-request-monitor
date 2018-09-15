@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModel="clr-namespace:PullRequestMonitor.ViewModel"
+             xmlns:props="clr-namespace:PullRequestMonitor.Properties"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 
@@ -34,10 +35,10 @@
             <Run>
                 <Run.Style>
                     <Style TargetType="Run">
-                        <Setter Property="Text" Value="opened"/>
+                        <Setter Property="Text" Value="{x:Static props:Resources.PullRequestCreationActionPastTense}"/>
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding Path=IsCompleted}" Value="True">
-                                <Setter Property="Text" Value="completed"/>
+                                <Setter Property="Text" Value="{x:Static props:Resources.PullRequestCompletionActionPastTense}"/>
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>

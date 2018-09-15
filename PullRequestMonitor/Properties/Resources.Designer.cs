@@ -107,6 +107,15 @@ namespace PullRequestMonitor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to completed.
+        /// </summary>
+        public static string PullRequestCompletionActionPastTense {
+            get {
+                return ResourceManager.GetString("PullRequestCompletionActionPastTense", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0:d} unapproved
         ///{1:d} approved.
         /// </summary>
@@ -122,6 +131,15 @@ namespace PullRequestMonitor.Properties {
         public static string PullRequestCountTooltipSingular {
             get {
                 return ResourceManager.GetString("PullRequestCountTooltipSingular", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to opened.
+        /// </summary>
+        public static string PullRequestCreationActionPastTense {
+            get {
+                return ResourceManager.GetString("PullRequestCreationActionPastTense", resourceCulture);
             }
         }
         
