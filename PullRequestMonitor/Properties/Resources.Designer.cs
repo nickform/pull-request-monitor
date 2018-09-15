@@ -98,6 +98,15 @@ namespace PullRequestMonitor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pull Requests in.
+        /// </summary>
+        public static string MonitorWindowHeading {
+            get {
+                return ResourceManager.GetString("MonitorWindowHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No projects are configured..
         /// </summary>
         public static string NoProjectsMessage {

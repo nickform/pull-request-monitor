@@ -32,10 +32,6 @@ namespace PullRequestMonitor.UnitTest.View
                     activePullRequests.AddOrUpdate(i, pullRequest, (j, request) => request);
                 }
 
-                var project = Substitute.For<ITfProject>();
-                project.Unapproved.Returns(activePullRequests);
-                project.Approved.Returns(activePullRequests);
-
                 var now = DateTime.Now;
                 var completedPullRequests = new ConcurrentDictionary<int, IPullRequest>();
                 for (int i = 5; i < 12; i++)
@@ -50,6 +46,11 @@ namespace PullRequestMonitor.UnitTest.View
                     pullRequest.Repository.Returns(repo);
                     completedPullRequests.AddOrUpdate(i, pullRequest, (j, request) => request);
                 }
+
+                var project = Substitute.For<ITfProject>();
+                project.Name.Returns("Your dream project");
+                project.Unapproved.Returns(activePullRequests);
+                project.Approved.Returns(activePullRequests);
                 project.Completed.Returns(completedPullRequests);
 
                 var singleProjectViewModel = new SingleProjectViewModel(new ActivePullRequestListViewModel(), new ActivePullRequestListViewModel(), new CompletedPullRequestListViewModel());

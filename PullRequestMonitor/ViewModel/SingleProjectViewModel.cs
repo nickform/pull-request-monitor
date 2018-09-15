@@ -1,9 +1,13 @@
-﻿using PullRequestMonitor.Model;
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using PullRequestMonitor.Model;
 
 namespace PullRequestMonitor.ViewModel
 {
-    public sealed class SingleProjectViewModel : IUpdateable
+    public sealed class SingleProjectViewModel : IUpdateable, INotifyPropertyChanged
     {
+        private ITfProject _model;
+
         public SingleProjectViewModel(ActivePullRequestListViewModel unapproved, ActivePullRequestListViewModel approved, CompletedPullRequestListViewModel completed)
         {
             Unapproved = unapproved;
@@ -11,7 +15,23 @@ namespace PullRequestMonitor.ViewModel
             Completed = completed;
         }
 
-        public ITfProject Model { get; set; }
+        public ITfProject Model
+        {
+            get => _model;
+
+            set
+            {
+                if (value == _model)
+                {
+                    return;
+                }
+
+                _model = value;
+                OnPropertyChanged(nameof(Name));
+            }
+        }
+
+        public string Name => Model == null ? "" : Model.Name;
 
         public ActivePullRequestListViewModel Unapproved { get; }
 
@@ -31,6 +51,13 @@ namespace PullRequestMonitor.ViewModel
             Unapproved.Update();
             Approved.Update();
             Completed.Update();
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
