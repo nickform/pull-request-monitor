@@ -38,5 +38,5 @@
             <view:SingleProjectView/>
         </DataTemplate>
     </Window.Resources>
-    <ContentControl Width="400" Height="Auto" Content="{Binding ContentViewModel}"></ContentControl>
+    <ContentControl Width="450" Height="Auto" Content="{Binding ContentViewModel}"></ContentControl>
 </Window>

@@ -98,11 +98,47 @@ namespace PullRequestMonitor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pull Requests in.
+        /// </summary>
+        public static string MonitorWindowHeading {
+            get {
+                return ResourceManager.GetString("MonitorWindowHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No projects are configured..
         /// </summary>
         public static string NoProjectsMessage {
             get {
                 return ResourceManager.GetString("NoProjectsMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Active.
+        /// </summary>
+        public static string PullRequestActiveStateName {
+            get {
+                return ResourceManager.GetString("PullRequestActiveStateName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Completed.
+        /// </summary>
+        public static string PullRequestCompletedStateName {
+            get {
+                return ResourceManager.GetString("PullRequestCompletedStateName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to completed.
+        /// </summary>
+        public static string PullRequestCompletionActionPastTense {
+            get {
+                return ResourceManager.GetString("PullRequestCompletionActionPastTense", resourceCulture);
             }
         }
         
@@ -122,6 +158,15 @@ namespace PullRequestMonitor.Properties {
         public static string PullRequestCountTooltipSingular {
             get {
                 return ResourceManager.GetString("PullRequestCountTooltipSingular", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to opened.
+        /// </summary>
+        public static string PullRequestCreationActionPastTense {
+            get {
+                return ResourceManager.GetString("PullRequestCreationActionPastTense", resourceCulture);
             }
         }
         

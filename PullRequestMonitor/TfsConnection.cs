@@ -78,8 +78,6 @@ namespace PullRequestMonitor
         public Task<IEnumerable<IPullRequest>> GetCompletedPullRequestsInProject(ITfProject project)
         {
             return PullRequestsInProject(project, CompletedPullRequestSearchCriteria);
-           // IOrderedEnumerable<IPullRequest> thing2 = thing.Result.OrderByDescending(x => x.Created.Date);
-           //return Task.FromResult((IEnumerable<IPullRequest>) thing2);
         }
 
         private Task<IEnumerable<IPullRequest>> PullRequestsInProject(ITfProject project, GitPullRequestSearchCriteria pullRequestSearchCriteria)

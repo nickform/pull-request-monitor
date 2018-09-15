@@ -4,26 +4,39 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PullRequestMonitor.View"
+             xmlns:props="clr-namespace:PullRequestMonitor.Properties"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid Height="450">
+    <Grid Height="475">
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
-        <TextBlock Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="18" Margin="5">Active pull requests</TextBlock>
-        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-            <StackPanel Orientation="Vertical" Height="Auto">
-                <TextBlock Margin="5 2 5 2">Approval needed:</TextBlock>
-                <local:PullRequestListView Margin="5" DataContext="{Binding Unapproved}"/>
-                <TextBlock Margin="5 2 5 2">Approved:</TextBlock>
-                <local:PullRequestListView Margin="5" DataContext="{Binding Approved}"/>
-                <Expander Header="Completed:">
-                    <local:PullRequestListView Margin="5" DataContext="{Binding Completed}"/>
-                </Expander>
-            </StackPanel>
-        </ScrollViewer>
+        <TextBlock Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="18" Margin="10 5 10 5">
+            <Run Text="{x:Static props:Resources.MonitorWindowHeading}"/>
+            <Run Text="{Binding Mode=OneWay, Path=Name}"/>
+        </TextBlock>
+
+        <TabControl Grid.Row="1">
+            <TabItem Header="{x:Static props:Resources.PullRequestActiveStateName}">
+                <ScrollViewer  VerticalScrollBarVisibility="Auto">
+                    <StackPanel Orientation="Vertical" Height="Auto">
+                        <TextBlock Margin="5 2 5 2">Approval needed:</TextBlock>
+                        <local:PullRequestListView Margin="5" DataContext="{Binding Unapproved}"/>
+                        <TextBlock Margin="5 2 5 2">Approved:</TextBlock>
+                        <local:PullRequestListView Margin="5" DataContext="{Binding Approved}"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="{x:Static props:Resources.PullRequestCompletedStateName}">
+                <ScrollViewer  VerticalScrollBarVisibility="Auto">
+                    <StackPanel Orientation="Vertical" Height="Auto">
+                        <local:PullRequestListView Margin="5" DataContext="{Binding Completed}"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
     </Grid>
 </UserControl>
 

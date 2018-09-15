@@ -19,9 +19,28 @@ namespace PullRequestMonitor.UnitTest.ViewModel
         }
 
         [Test]
+        public void TestName_WhenModelIsNull_ReturnsEmptyString()
+        {
+            var systemUnderTest = new SingleProjectViewModel(new ActivePullRequestListViewModel(), new ActivePullRequestListViewModel(), new CompletedPullRequestListViewModel());
+
+            Assert.That(systemUnderTest.Name, Is.Empty);
+        }
+
+        [Test]
+        public void TestName_WhenModelIsNotNull_ReturnsModelName()
+        {
+            var name = "testy name";
+            var systemUnderTest = new SingleProjectViewModel(new ActivePullRequestListViewModel(), new ActivePullRequestListViewModel(), new CompletedPullRequestListViewModel());
+            _tfProject.Name.Returns(name);
+            systemUnderTest.Model = _tfProject;
+
+            Assert.That(systemUnderTest.Name, Is.EqualTo(name));
+        }
+
+        [Test]
         public void TestApproved_ForNewInstance_IsNotNull()
         {
-            var systemUnderTest = new SingleProjectViewModel(new PullRequestListViewModel(), new PullRequestListViewModel(), new PullRequestDescendingListViewModel());
+            var systemUnderTest = new SingleProjectViewModel(new ActivePullRequestListViewModel(), new ActivePullRequestListViewModel(), new CompletedPullRequestListViewModel());
 
             Assert.That(systemUnderTest.Approved, Is.Not.Null);
         }
@@ -30,9 +49,23 @@ namespace PullRequestMonitor.UnitTest.ViewModel
         [Test]
         public void TestApprovalNeeded_ForNewInstance_IsNotNull()
         {
-            var systemUnderTest = new SingleProjectViewModel(new PullRequestListViewModel(), new PullRequestListViewModel(), new PullRequestDescendingListViewModel());
+            var systemUnderTest = new SingleProjectViewModel(new ActivePullRequestListViewModel(), new ActivePullRequestListViewModel(), new CompletedPullRequestListViewModel());
 
             Assert.That(systemUnderTest.Unapproved, Is.Not.Null);
+        }
+
+        [Test]
+        public void TestModelSetter_RaisesPropertyChangedForName()
+        {
+            var numCalls = 0;
+            var systemUnderTest = new SingleProjectViewModel(new ActivePullRequestListViewModel(), new ActivePullRequestListViewModel(), new CompletedPullRequestListViewModel());
+            systemUnderTest.PropertyChanged += (sender, args) =>
+            {
+                if (args.PropertyName == nameof(SingleProjectViewModel.Name)) numCalls++;
+            };
+            systemUnderTest.Model = _tfProject;
+
+            Assert.That(numCalls, Is.EqualTo(1));
         }
     }
 }

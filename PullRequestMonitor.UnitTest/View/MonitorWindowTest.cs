@@ -1,4 +1,5 @@
-﻿using System.Collections.Concurrent;
+﻿using System;
+using System.Collections.Concurrent;
 using System.Threading;
 using System.Windows;
 using NSubstitute;
@@ -18,7 +19,7 @@ namespace PullRequestMonitor.UnitTest.View
 
             var t = new Thread(() =>
             {
-                var gitPullRequests = new ConcurrentDictionary<int, IPullRequest>();
+                var activePullRequests = new ConcurrentDictionary<int, IPullRequest>();
                 for (int i = 0; i < 5; i++)
                 {
                     var pullRequest = Substitute.For<IPullRequest>();
@@ -28,15 +29,31 @@ namespace PullRequestMonitor.UnitTest.View
                     var repo = Substitute.For<ITfGitRepository>();
                     repo.Name.Returns("test-repo.git");
                     pullRequest.Repository.Returns(repo);
-                    gitPullRequests.AddOrUpdate(i, pullRequest, (j, request) => request);
+                    activePullRequests.AddOrUpdate(i, pullRequest, (j, request) => request);
+                }
+
+                var now = DateTime.Now;
+                var completedPullRequests = new ConcurrentDictionary<int, IPullRequest>();
+                for (int i = 5; i < 12; i++)
+                {
+                    var pullRequest = Substitute.For<IPullRequest>();
+                    pullRequest.Id.Returns(i);
+                    pullRequest.Completed.Returns(now.Subtract(TimeSpan.FromMinutes(12.3 * i)));
+                    pullRequest.Title.Returns("Test pull request");
+                    pullRequest.AuthorDisplayName.Returns("Amelia Devon");
+                    var repo = Substitute.For<ITfGitRepository>();
+                    repo.Name.Returns("cool-repo.git");
+                    pullRequest.Repository.Returns(repo);
+                    completedPullRequests.AddOrUpdate(i, pullRequest, (j, request) => request);
                 }
 
                 var project = Substitute.For<ITfProject>();
-                project.Unapproved.Returns(gitPullRequests);
-                project.Approved.Returns(gitPullRequests);
-                project.Completed.Returns(gitPullRequests);
+                project.Name.Returns("Your dream project");
+                project.Unapproved.Returns(activePullRequests);
+                project.Approved.Returns(activePullRequests);
+                project.Completed.Returns(completedPullRequests);
 
-                var singleProjectViewModel = new SingleProjectViewModel(new PullRequestListViewModel(), new PullRequestListViewModel(), new PullRequestDescendingListViewModel());
+                var singleProjectViewModel = new SingleProjectViewModel(new ActivePullRequestListViewModel(), new ActivePullRequestListViewModel(), new CompletedPullRequestListViewModel());
 
                 var monitor = Substitute.For<IMonitor>();
                 monitor.Projects.Returns(new[] { project });

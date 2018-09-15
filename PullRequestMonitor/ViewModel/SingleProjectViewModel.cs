@@ -1,23 +1,43 @@
-﻿using PullRequestMonitor.Model;
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using PullRequestMonitor.Model;
 
 namespace PullRequestMonitor.ViewModel
 {
-    public sealed class SingleProjectViewModel : IUpdateable
+    public sealed class SingleProjectViewModel : IUpdateable, INotifyPropertyChanged
     {
-        public SingleProjectViewModel(PullRequestListViewModel unapproved, PullRequestListViewModel approved, PullRequestDescendingListViewModel completed)
+        private ITfProject _model;
+
+        public SingleProjectViewModel(ActivePullRequestListViewModel unapproved, ActivePullRequestListViewModel approved, CompletedPullRequestListViewModel completed)
         {
             Unapproved = unapproved;
             Approved = approved;
             Completed = completed;
         }
 
-        public ITfProject Model { get; set; }
+        public ITfProject Model
+        {
+            get => _model;
 
-        public PullRequestListViewModel Unapproved { get; }
+            set
+            {
+                if (value == _model)
+                {
+                    return;
+                }
 
-        public PullRequestListViewModel Approved { get; }
+                _model = value;
+                OnPropertyChanged(nameof(Name));
+            }
+        }
 
-        public PullRequestDescendingListViewModel Completed { get; }
+        public string Name => Model == null ? "" : Model.Name;
+
+        public ActivePullRequestListViewModel Unapproved { get; }
+
+        public ActivePullRequestListViewModel Approved { get; }
+
+        public CompletedPullRequestListViewModel Completed { get; }
 
         public void Update()
         {
@@ -31,6 +51,13 @@ namespace PullRequestMonitor.ViewModel
             Unapproved.Update();
             Approved.Update();
             Completed.Update();
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

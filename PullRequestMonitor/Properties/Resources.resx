@@ -150,4 +150,19 @@ Have you added valid credentials to Windows credential manager? </value>
   <data name="SquirrelUrlOrPath" xml:space="preserve">
     <value>https://github.com/nickform/pull-request-monitor</value>
   </data>
+  <data name="MonitorWindowHeading" xml:space="preserve">
+    <value>Pull Requests in</value>
+  </data>
+  <data name="PullRequestCompletionActionPastTense" xml:space="preserve">
+    <value>completed</value>
+  </data>
+  <data name="PullRequestCreationActionPastTense" xml:space="preserve">
+    <value>opened</value>
+  </data>
+  <data name="PullRequestActiveStateName" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="PullRequestCompletedStateName" xml:space="preserve">
+    <value>Completed</value>
+  </data>
 </root>

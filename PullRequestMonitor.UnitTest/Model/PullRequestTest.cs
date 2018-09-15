@@ -85,6 +85,29 @@ namespace PullRequestMonitor.UnitTest.Model
             Assert.That(systemUnderTest.Created, Is.EqualTo(creationDate));
         }
 
+        [Test]
+        public void TestCompleted_WhenImplStatusIsNotCompleted_ReturnsNull()
+        {
+            var systemUnderTest =
+                new PullRequest(new GitPullRequest { Status= PullRequestStatus.Active },
+                    "server-uri",
+                    _repo);
+
+            Assert.That(systemUnderTest.Completed, Is.Null);
+        }
+
+        [Test]
+        public void TestCompleted_WhenImplStatusIsCompleted_ReturnsClosedOfImpl()
+        {
+            var closedDateTime = DateTime.UtcNow.AddDays(-1);
+            var systemUnderTest =
+                new PullRequest(new GitPullRequest { Status = PullRequestStatus.Completed, ClosedDate = closedDateTime},
+                    "server-uri",
+                    _repo);
+
+            Assert.That(systemUnderTest.Completed, Is.EqualTo(closedDateTime));
+        }
+
         [Test, TestCaseSource(nameof(UnapprovedVoteCodes))]
         public void TestIsApproved_WhenThereIsOneReviewerVotingZeroOrLess_ReturnsFalse(short vote)
         {

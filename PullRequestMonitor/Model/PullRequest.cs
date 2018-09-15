@@ -12,6 +12,7 @@ namespace PullRequestMonitor.Model
         string Title { get; }
         string AuthorDisplayName { get; }
         DateTime Created { get; }
+        DateTime? Completed { get;  }
         Uri WebViewUri { get; }
     }
 
@@ -33,6 +34,19 @@ namespace PullRequestMonitor.Model
         public string Title => _pullRequest.Title;
         public string AuthorDisplayName => _pullRequest.CreatedBy.DisplayName;
         public DateTime Created => _pullRequest.CreationDate;
+
+        public DateTime? Completed
+        {
+            get
+            {
+                if (_pullRequest.Status != PullRequestStatus.Completed)
+                {
+                    return null;
+                }
+
+                return _pullRequest.ClosedDate;
+            }
+        }
 
         public Uri WebViewUri => new Uri($"{_serverUri}{Repository.Project.Name}/_git/{Repository.Name}/pullrequest/{Id:d}");
     }

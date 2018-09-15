@@ -5,9 +5,9 @@ using PullRequestMonitor.Model;
 
 namespace PullRequestMonitor.ViewModel
 {
-    public sealed class PullRequestDescendingListViewModel : IPullRequestListViewModel
+    public sealed class ActivePullRequestListViewModel : IPullRequestListViewModel
     {
-        public PullRequestDescendingListViewModel()
+        public ActivePullRequestListViewModel()
         {
             PullRequests = new ObservableCollection<PullRequestViewModel>();
         }
@@ -17,7 +17,7 @@ namespace PullRequestMonitor.ViewModel
         public void Update()
         {
             PullRequests.Clear();
-            foreach (var pullRequest in Model.Values.OrderByDescending(pr => pr.Id))
+            foreach (var pullRequest in Model.Values.OrderBy(pr => pr.Id))
             {
                 PullRequests.Add(new PullRequestViewModel(pullRequest));
             }
