@@ -10,8 +10,7 @@
     <ListView Margin="5" ItemsSource="{Binding PullRequests}" 
               ScrollViewer.HorizontalScrollBarVisibility="Disabled"
               HorizontalContentAlignment="Stretch"
-              ScrollViewer.VerticalScrollBarVisibility="Auto"
-              ScrollViewer.CanContentScroll="False">
+              PreviewMouseWheel="HandlePreviewMouseWheel">
         <ListView.ItemTemplate>
             <DataTemplate>
                 <view:PullRequestView/>

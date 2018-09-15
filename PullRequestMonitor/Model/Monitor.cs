@@ -52,7 +52,7 @@ namespace PullRequestMonitor.Model
         void Start();
     }
 
-    internal sealed class Monitor : IMonitor
+    public sealed class Monitor : IMonitor
     {
         private readonly IMonitorSettings _settings;
         private readonly ITfProjectCollectionCache _tfProjectCollectionCache;

@@ -15,7 +15,7 @@ namespace PullRequestMonitor.Model
         Uri WebViewUri { get; }
     }
 
-    internal sealed class PullRequest : IPullRequest
+    public sealed class PullRequest : IPullRequest
     {
         private readonly GitPullRequest _pullRequest;
         private readonly string _serverUri;

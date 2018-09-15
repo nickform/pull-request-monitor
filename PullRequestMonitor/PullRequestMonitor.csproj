@@ -42,6 +42,7 @@
     <Compile Include="Factories\ITfGitRepositoryFactory.cs" />
     <Compile Include="Factories\ITfProjectCollectionFactory.cs" />
     <Compile Include="Factories\TfProjectCollectionCache.cs" />
+    <Compile Include="Model\ITfProject.cs" />
     <Compile Include="Model\VstsServerURL.cs" />
     <Compile Include="Model\IAppSettings.cs" />
     <Compile Include="Model\IRepositoryFilter.cs" />
@@ -53,7 +54,6 @@
     <Compile Include="Model\TfGitRepository.cs" />
     <Compile Include="Model\ITfsConnection.cs" />
     <Compile Include="Model\TfProjectCollection.cs" />
-    <Compile Include="Properties\FriendAssemblies.cs" />
     <Compile Include="Factories\ITfProjectFactory.cs" />
     <Compile Include="Factories\ITfsConnectionFactory.cs" />
     <Compile Include="Factories\ITrayIconFactory.cs" />
@@ -69,12 +69,14 @@
     <Compile Include="ViewModel\CountToIconConverter.cs" />
     <Compile Include="ViewModel\DateTimeToHumanFriendlyStringConverter.cs" />
     <Compile Include="ViewModel\FirstUpdateViewModel.cs" />
+    <Compile Include="ViewModel\IPullRequestListViewModel.cs" />
     <Compile Include="ViewModel\IUpdateable.cs" />
     <Compile Include="ViewModel\MonitorWindowViewModel.cs" />
     <Compile Include="Factories\ITrayIconViewModelFactory.cs" />
     <Compile Include="Model\Monitor.cs" />
     <Compile Include="Model\TrayIcon.cs" />
     <Compile Include="ViewModel\NoProjectsViewModel.cs" />
+    <Compile Include="ViewModel\PullRequestDescendingListViewModel.cs" />
     <Compile Include="ViewModel\PullRequestListViewModel.cs" />
     <Compile Include="ViewModel\PullRequestViewModel.cs" />
     <Compile Include="ViewModel\RepositoryViewModel.cs" />

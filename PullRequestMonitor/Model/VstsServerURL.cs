@@ -1,6 +1,6 @@
 ﻿namespace PullRequestMonitor.Model
 {
-    static class VstsServerURL
+    public static class VstsServerURL
     {
         public static string GetVstsServerURL(string vstsAccount)
         {

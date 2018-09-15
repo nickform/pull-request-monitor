@@ -6,7 +6,7 @@ namespace PullRequestMonitor.ViewModel
     /// <summary>
     /// Simplistic delegate command for the demo.
     /// </summary>
-    internal sealed class DelegateCommand : ICommand
+    public sealed class DelegateCommand : ICommand
     {
         public Action CommandAction { get; set; }
         public Func<bool> CanExecuteFunc { get; set; }

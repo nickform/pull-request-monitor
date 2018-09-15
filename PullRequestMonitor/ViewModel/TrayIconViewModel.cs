@@ -15,7 +15,7 @@ namespace PullRequestMonitor.ViewModel
         string TooltipText { get; }
     }
 
-    internal sealed class TrayIconViewModel : ITrayIconViewModel
+    public sealed class TrayIconViewModel : ITrayIconViewModel
     {
         private readonly IApplicationActions _applicationActions;
         private ITrayIcon _model;
