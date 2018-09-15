@@ -21,7 +21,7 @@ namespace PullRequestMonitor.UnitTest.ViewModel
         [Test]
         public void TestApproved_ForNewInstance_IsNotNull()
         {
-            var systemUnderTest = new SingleProjectViewModel(new PullRequestListViewModel(), new PullRequestListViewModel(), new PullRequestDescendingListViewModel());
+            var systemUnderTest = new SingleProjectViewModel(new ActivePullRequestListViewModel(), new ActivePullRequestListViewModel(), new CompletedPullRequestListViewModel());
 
             Assert.That(systemUnderTest.Approved, Is.Not.Null);
         }
@@ -30,7 +30,7 @@ namespace PullRequestMonitor.UnitTest.ViewModel
         [Test]
         public void TestApprovalNeeded_ForNewInstance_IsNotNull()
         {
-            var systemUnderTest = new SingleProjectViewModel(new PullRequestListViewModel(), new PullRequestListViewModel(), new PullRequestDescendingListViewModel());
+            var systemUnderTest = new SingleProjectViewModel(new ActivePullRequestListViewModel(), new ActivePullRequestListViewModel(), new CompletedPullRequestListViewModel());
 
             Assert.That(systemUnderTest.Unapproved, Is.Not.Null);
         }

@@ -52,7 +52,7 @@ namespace PullRequestMonitor.UnitTest.View
                 }
                 project.Completed.Returns(completedPullRequests);
 
-                var singleProjectViewModel = new SingleProjectViewModel(new PullRequestListViewModel(), new PullRequestListViewModel(), new PullRequestDescendingListViewModel());
+                var singleProjectViewModel = new SingleProjectViewModel(new ActivePullRequestListViewModel(), new ActivePullRequestListViewModel(), new CompletedPullRequestListViewModel());
 
                 var monitor = Substitute.For<IMonitor>();
                 monitor.Projects.Returns(new[] { project });

@@ -16,7 +16,7 @@ namespace PullRequestMonitor.UnitTest.ViewModel
             var model = new ConcurrentDictionary<int, IPullRequest>();
             model.AddOrUpdate(0, Substitute.For<IPullRequest>(), (i, request) => request);
             model.AddOrUpdate(1, Substitute.For<IPullRequest>(), (i, request) => request);
-            var systemUnderTest = new PullRequestListViewModel();
+            var systemUnderTest = new ActivePullRequestListViewModel();
             systemUnderTest.Model = model;
             systemUnderTest.Update();
 
@@ -39,7 +39,7 @@ namespace PullRequestMonitor.UnitTest.ViewModel
             {
                 model.AddOrUpdate(pr.Id, pr, (i, req) => req);
             }
-            var systemUnderTest = new PullRequestListViewModel {Model = model};
+            var systemUnderTest = new ActivePullRequestListViewModel {Model = model};
             systemUnderTest.Update();
 
             var previousId = 0;

@@ -5,9 +5,9 @@ using PullRequestMonitor.Model;
 
 namespace PullRequestMonitor.ViewModel
 {
-    public sealed class PullRequestListViewModel : IPullRequestListViewModel
+    public sealed class ActivePullRequestListViewModel : IPullRequestListViewModel
     {
-        public PullRequestListViewModel()
+        public ActivePullRequestListViewModel()
         {
             PullRequests = new ObservableCollection<PullRequestViewModel>();
         }

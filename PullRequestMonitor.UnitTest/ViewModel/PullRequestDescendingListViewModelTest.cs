@@ -21,7 +21,7 @@ namespace PullRequestMonitor.UnitTest.ViewModel
             var second = Substitute.For<IPullRequest>();
             second.Completed.Returns(DateTime.Today);
             model.AddOrUpdate(1, second, (i, request) => request);
-            var systemUnderTest = new PullRequestDescendingListViewModel();
+            var systemUnderTest = new CompletedPullRequestListViewModel();
             systemUnderTest.Model = model;
             systemUnderTest.Update();
 
@@ -51,7 +51,7 @@ namespace PullRequestMonitor.UnitTest.ViewModel
                 model.AddOrUpdate(pr.Id, pr, (i, req) => req);
             }
 
-            var systemUnderTest = new PullRequestDescendingListViewModel {Model = model};
+            var systemUnderTest = new CompletedPullRequestListViewModel {Model = model};
             systemUnderTest.Update();
 
             Assert.That(systemUnderTest.PullRequests.Count, Is.EqualTo(3));
@@ -81,7 +81,7 @@ namespace PullRequestMonitor.UnitTest.ViewModel
                 model.AddOrUpdate(pr.Id, pr, (i, req) => req);
             }
 
-            var systemUnderTest = new PullRequestDescendingListViewModel {Model = model};
+            var systemUnderTest = new CompletedPullRequestListViewModel {Model = model};
             systemUnderTest.Update();
 
             DateTime? previousCompleted = now;

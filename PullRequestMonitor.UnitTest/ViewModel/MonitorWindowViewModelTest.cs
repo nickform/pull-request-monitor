@@ -27,7 +27,7 @@ namespace PullRequestMonitor.UnitTest.ViewModel
             var firstUpdateViewModel = new FirstUpdateViewModel();
 
             var systemUnderTest = new MonitorWindowViewModel(_monitor, Substitute.For<INoProjectsViewModel>(),
-                new SingleProjectViewModel(new PullRequestListViewModel(), new PullRequestListViewModel(), new PullRequestDescendingListViewModel()),
+                new SingleProjectViewModel(new ActivePullRequestListViewModel(), new ActivePullRequestListViewModel(), new CompletedPullRequestListViewModel()),
                 firstUpdateViewModel, _couldNotReachServerViewModel, new UnrecognisedErrorViewModel());
 
             Assert.That(systemUnderTest.ContentViewModel, Is.EqualTo(firstUpdateViewModel));
@@ -39,7 +39,7 @@ namespace PullRequestMonitor.UnitTest.ViewModel
             _monitor.Status.Returns(MonitorStatus.CouldNotReachServer);
 
             var systemUnderTest = new MonitorWindowViewModel(_monitor, Substitute.For<INoProjectsViewModel>(),
-                new SingleProjectViewModel(new PullRequestListViewModel(), new PullRequestListViewModel(), new PullRequestDescendingListViewModel()),
+                new SingleProjectViewModel(new ActivePullRequestListViewModel(), new ActivePullRequestListViewModel(), new CompletedPullRequestListViewModel()),
                 new FirstUpdateViewModel(), _couldNotReachServerViewModel, new UnrecognisedErrorViewModel());
 
             Assert.That(systemUnderTest.ContentViewModel, Is.EqualTo(_couldNotReachServerViewModel));
@@ -52,7 +52,7 @@ namespace PullRequestMonitor.UnitTest.ViewModel
             _monitor.Status.Returns(MonitorStatus.NoProjects);
 
             var systemUnderTest = new MonitorWindowViewModel(_monitor, noProjectsViewModel,
-                new SingleProjectViewModel(new PullRequestListViewModel(), new PullRequestListViewModel(), new PullRequestDescendingListViewModel()),
+                new SingleProjectViewModel(new ActivePullRequestListViewModel(), new ActivePullRequestListViewModel(), new CompletedPullRequestListViewModel()),
                 new FirstUpdateViewModel(), _couldNotReachServerViewModel, new UnrecognisedErrorViewModel());
 
             Assert.That(systemUnderTest.ContentViewModel, Is.EqualTo(noProjectsViewModel));
@@ -64,7 +64,7 @@ namespace PullRequestMonitor.UnitTest.ViewModel
             _monitor.Status.Returns(MonitorStatus.UnrecognisedError);
             var unrecognisedErrorViewModel = new UnrecognisedErrorViewModel();
             var systemUnderTest = new MonitorWindowViewModel(_monitor, Substitute.For<INoProjectsViewModel>(),
-                new SingleProjectViewModel(new PullRequestListViewModel(), new PullRequestListViewModel(), new PullRequestDescendingListViewModel()),
+                new SingleProjectViewModel(new ActivePullRequestListViewModel(), new ActivePullRequestListViewModel(), new CompletedPullRequestListViewModel()),
                 new FirstUpdateViewModel(), _couldNotReachServerViewModel, unrecognisedErrorViewModel);
 
             Assert.That(systemUnderTest.ContentViewModel, Is.EqualTo(unrecognisedErrorViewModel));
@@ -73,7 +73,7 @@ namespace PullRequestMonitor.UnitTest.ViewModel
         [Test]
         public void TestContentViewModel_WhenMonitorStatusIsUpdateSuccessful_ReturnsSingleProjectViewModel()
         {
-            var singleProjectViewModel = new SingleProjectViewModel(new PullRequestListViewModel(), new PullRequestListViewModel(), new PullRequestDescendingListViewModel());
+            var singleProjectViewModel = new SingleProjectViewModel(new ActivePullRequestListViewModel(), new ActivePullRequestListViewModel(), new CompletedPullRequestListViewModel());
             _monitor.Projects.Returns(new ObservableCollection<ITfProject> {Substitute.For<ITfProject>()});
             _monitor.Status.Returns(MonitorStatus.UpdateSuccessful);
 
@@ -87,7 +87,7 @@ namespace PullRequestMonitor.UnitTest.ViewModel
         [Test]
         public void TestUpdate_WhenMonitorStatusIsNoProjects_UpdatesNoProjectsViewModelOnly()
         {
-            var singleProjectViewModel = new SingleProjectViewModel(new PullRequestListViewModel(), new PullRequestListViewModel(), new PullRequestDescendingListViewModel());
+            var singleProjectViewModel = new SingleProjectViewModel(new ActivePullRequestListViewModel(), new ActivePullRequestListViewModel(), new CompletedPullRequestListViewModel());
             var noProjectsViewModel = Substitute.For<INoProjectsViewModel>();
             _monitor.Status.Returns(MonitorStatus.NoProjects);
             var systemUnderTest = new MonitorWindowViewModel(_monitor, noProjectsViewModel, singleProjectViewModel,
@@ -104,8 +104,8 @@ namespace PullRequestMonitor.UnitTest.ViewModel
         public void TestUpdate_WhenProjectsHaveBeenAdded_RaisesContentViewModelChanged()
         {
             var numContentViewModelChanged = 0;
-            var pullRequestListViewModel = new PullRequestListViewModel();
-            var singleProjectViewModel = new SingleProjectViewModel(pullRequestListViewModel, pullRequestListViewModel, new PullRequestDescendingListViewModel());
+            var pullRequestListViewModel = new ActivePullRequestListViewModel();
+            var singleProjectViewModel = new SingleProjectViewModel(pullRequestListViewModel, pullRequestListViewModel, new CompletedPullRequestListViewModel());
             singleProjectViewModel.Model = null;
             var noProjectsViewModel = Substitute.For<INoProjectsViewModel>();
             var tfProject = Substitute.For<ITfProject>();
@@ -133,7 +133,7 @@ namespace PullRequestMonitor.UnitTest.ViewModel
         public void TestUpdate_WhenMonitorStatusIsUpdateSuccessful_UpdatesSingleProjectViewModelOnly()
         {
             var noProjectsViewModel = Substitute.For<INoProjectsViewModel>();
-            var singleProjectViewModel = new SingleProjectViewModel(new PullRequestListViewModel(), new PullRequestListViewModel(), new PullRequestDescendingListViewModel());
+            var singleProjectViewModel = new SingleProjectViewModel(new ActivePullRequestListViewModel(), new ActivePullRequestListViewModel(), new CompletedPullRequestListViewModel());
 
             var tfProject = Substitute.For<ITfProject>();
             var approvedDictionary = new ConcurrentDictionary<int, IPullRequest>();
