@@ -91,5 +91,26 @@ namespace PullRequestMonitor.UnitTest.ViewModel
 
             Assert.That(systemUnderTest.Created, Is.EqualTo(expectedCreatedDateTime));
         }
+
+        [Test]
+        public void TestCompleted_WhenModelCompletedIsNull_ReturnsNull()
+        {
+            var pullRequest = Substitute.For<IPullRequest>();
+            pullRequest.Completed.Returns(null as DateTime?);
+            var systemUnderTest = new PullRequestViewModel(pullRequest);
+
+            Assert.That(systemUnderTest.Completed, Is.Null);
+        }
+
+        [Test]
+        public void TestCompleted_WhenModelCompletedIsNotNull_ReturnsModelCompleted()
+        {
+            var expectedCompletedDateTime = DateTime.UtcNow.AddDays(-3);
+            var pullRequest = Substitute.For<IPullRequest>();
+            pullRequest.Completed.Returns(expectedCompletedDateTime);
+            var systemUnderTest = new PullRequestViewModel(pullRequest);
+
+            Assert.That(systemUnderTest.Completed, Is.EqualTo(expectedCompletedDateTime));
+        }
     }
 }

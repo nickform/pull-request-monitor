@@ -17,7 +17,7 @@ namespace PullRequestMonitor.ViewModel
         public void Update()
         {
             PullRequests.Clear();
-            foreach (var pullRequest in Model.Values.OrderByDescending(pr => pr.Id))
+            foreach (var pullRequest in Model.Values.Where(pr => pr.Completed != null).OrderByDescending(pr => pr.Completed))
             {
                 PullRequests.Add(new PullRequestViewModel(pullRequest));
             }
