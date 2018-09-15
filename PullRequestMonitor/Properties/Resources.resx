@@ -159,4 +159,10 @@ Have you added valid credentials to Windows credential manager? </value>
   <data name="PullRequestCreationActionPastTense" xml:space="preserve">
     <value>opened</value>
   </data>
+  <data name="PullRequestActiveStateName" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="PullRequestCompletedStateName" xml:space="preserve">
+    <value>Completed</value>
+  </data>
 </root>

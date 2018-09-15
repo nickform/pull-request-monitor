@@ -116,6 +116,24 @@ namespace PullRequestMonitor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Active.
+        /// </summary>
+        public static string PullRequestActiveStateName {
+            get {
+                return ResourceManager.GetString("PullRequestActiveStateName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Completed.
+        /// </summary>
+        public static string PullRequestCompletedStateName {
+            get {
+                return ResourceManager.GetString("PullRequestCompletedStateName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to completed.
         /// </summary>
         public static string PullRequestCompletionActionPastTense {
