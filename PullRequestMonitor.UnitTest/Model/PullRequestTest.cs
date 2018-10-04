@@ -74,6 +74,42 @@ namespace PullRequestMonitor.UnitTest.Model
         }
 
         [Test]
+        public void TestTitle_Indicates_IsWaitingForAuthor()
+        {
+            const string testTitle = "Test pull request title";
+            IdentityRefWithVote identityRef = new IdentityRefWithVote();
+            identityRef.Vote = -5;
+            IdentityRefWithVote[] identityRefList = new IdentityRefWithVote[1];
+            identityRefList[0] = identityRef;
+            GitPullRequest gitPullRequest = new GitPullRequest {Title = testTitle};
+            gitPullRequest.Reviewers = identityRefList;
+            var systemUnderTest =
+                new PullRequest(gitPullRequest,
+                    "server-uri",
+                    _repo);
+
+            Assert.That(systemUnderTest.Title, Does.Contain(" [Waiting for author]"));
+        }
+
+        [Test]
+        public void TestTitle_Indicates_IsRejected()
+        {
+            const string testTitle = "Test pull request title";
+            IdentityRefWithVote identityRef = new IdentityRefWithVote();
+            identityRef.Vote = -10;
+            IdentityRefWithVote[] identityRefList = new IdentityRefWithVote[1];
+            identityRefList[0] = identityRef;
+            GitPullRequest gitPullRequest = new GitPullRequest { Title = testTitle };
+            gitPullRequest.Reviewers = identityRefList;
+            var systemUnderTest =
+                new PullRequest(gitPullRequest,
+                    "server-uri",
+                    _repo);
+
+            Assert.That(systemUnderTest.Title, Does.Contain(" [Rejected]"));
+        }
+
+        [Test]
         public void TestCreated_ReturnsCreatedOfImpl()
         {
             var creationDate = DateTime.UtcNow.AddDays(-1);

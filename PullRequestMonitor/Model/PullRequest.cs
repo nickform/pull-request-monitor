@@ -29,9 +29,57 @@ namespace PullRequestMonitor.Model
         }
 
         public ITfGitRepository Repository { get; }
-        public bool IsApproved => _pullRequest.Reviewers.Any(reviewer => reviewer.Vote > 0) && !_pullRequest.Reviewers.Any(reviewer => reviewer.Vote < 0);
+        public bool IsApproved
+        {
+            get
+            {
+                IdentityRefWithVote[] reviewers = _pullRequest.Reviewers;
+                if (reviewers == null)
+                    return false;
+
+                return reviewers.Any(reviewer => reviewer.Vote > 0) && !IsWaitingForAuthor && !IsRejected;
+            }
+        }
+
+        private bool IsWaitingForAuthor
+        {
+            get
+            {
+                IdentityRefWithVote[] reviewers = _pullRequest.Reviewers;
+                if (reviewers == null)
+                    return false;
+
+                return reviewers.Any(reviewer => reviewer.Vote == -5);
+            }
+        }
+
+        private bool IsRejected
+        {
+            get
+            {
+                IdentityRefWithVote[] reviewers = _pullRequest.Reviewers;
+                if (reviewers == null)
+                    return false;
+
+                return _pullRequest.Reviewers.Any(reviewer => reviewer.Vote == -10);
+            }
+        }
+
         public int Id => _pullRequest.PullRequestId;
-        public string Title => _pullRequest.Title;
+        public string Title
+        {
+            get
+            {
+                string postfix = "";
+                if (IsRejected)
+                    postfix += " [Rejected]";
+                if (IsWaitingForAuthor)
+                    postfix += " [Waiting for author]";
+
+                return _pullRequest.Title + postfix;
+            }
+        }
+
         public string AuthorDisplayName => _pullRequest.CreatedBy.DisplayName;
         public DateTime Created => _pullRequest.CreationDate;
 
