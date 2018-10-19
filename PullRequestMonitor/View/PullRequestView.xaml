@@ -30,8 +30,8 @@
             </TextBlock.Inlines>
         </TextBlock>
         <TextBlock Grid.Row="1" Grid.Column="0" TextTrimming="CharacterEllipsis" Margin="2">
-            <Run Text="{Binding Mode=OneTime, Path=Author}" />
-            <Run Text=","/>
+            <Run Text="{Binding Mode=OneTime, Path=Author}"/><!--
+         --><Run Text=","/>
             <Run>
                 <Run.Style>
                     <Style TargetType="Run">
