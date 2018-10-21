@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows.Input;
 using PullRequestMonitor.Model;
 
 namespace PullRequestMonitor.ViewModel
@@ -28,6 +29,24 @@ namespace PullRequestMonitor.ViewModel
 
                 _model = value;
                 OnPropertyChanged(nameof(Name));
+            }
+        }
+
+        public ICommand OpenAllUnapproved
+        {
+            get
+            {
+                return new DelegateCommand
+                {
+                    CanExecuteFunc = () => _model.UnapprovedPullRequestCount > 0,
+                    CommandAction = () =>
+                    {
+                        foreach (var pr in _model.Unapproved.Values)
+                        {
+                            System.Diagnostics.Process.Start(pr.WebViewUri.ToString());
+                        }
+                    }
+                };
             }
         }
 
