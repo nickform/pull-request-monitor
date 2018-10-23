@@ -22,8 +22,15 @@
             <TabItem Header="{x:Static props:Resources.PullRequestActiveStateName}">
                 <ScrollViewer  VerticalScrollBarVisibility="Auto">
                     <StackPanel Orientation="Vertical" Height="Auto">
-                        <TextBlock Margin="5 2 5 2">Approval needed:</TextBlock>
-                        <local:PullRequestListView Margin="5" DataContext="{Binding Unapproved}"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" VerticalAlignment="Top" Margin="5">Approval needed:</TextBlock>
+                            <Button Grid.Column="1" Margin="5 5 10 5" Padding="3 0 3 0" Command="{Binding OpenAllUnapproved}">Open all</Button>
+                        </Grid>
+                        <local:PullRequestListView Margin="5 2 5 2" DataContext="{Binding Unapproved}"/>
                         <TextBlock Margin="5 2 5 2">Approved:</TextBlock>
                         <local:PullRequestListView Margin="5" DataContext="{Binding Approved}"/>
                     </StackPanel>
