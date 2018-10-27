@@ -16,12 +16,12 @@ namespace PullRequestMonitor.UnitTest.ViewModel
         }
 
         [Test]
-        public void TestServerWebViewUrl_ReturnsSettingsVstsUrl()
+        public void TestServerWebViewUrl_ReturnsSettingsUrl()
         {
-            var testVstsAccount = "my-account";
-            var exptectedServerWebViewUrl = VstsServerURL.GetVstsServerURL(testVstsAccount);
+            var testAccount = "my-account";
+            var exptectedServerWebViewUrl = ServerUrl.GetServerURL(testAccount);
             var appSettings = Substitute.For<IAppSettings>();
-            appSettings.VstsAccount.Returns(testVstsAccount);
+            appSettings.Account.Returns(testAccount);
             var systemUnderTest = new CouldNotReachServerViewModel(Substitute.For<IApplicationActions>(), appSettings);
 
             Assert.That(systemUnderTest.ServerWebViewUrl, Is.EqualTo(exptectedServerWebViewUrl));

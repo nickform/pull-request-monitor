@@ -16,27 +16,27 @@ namespace PullRequestMonitor.UnitTest.ViewModel
     public class SettingsViewModelTest
     {
         [Test]
-        public void TestVstsAccountGetter_ReturnsAppSettingsVstsAccount()
+        public void TestAccountGetter_ReturnsAppSettingsAccount()
         {
-            const string appSettingsVstsAccount = "any-account";
+            const string appSettingsAccount = "any-account";
             var appSettings = Substitute.For<IAppSettings>();
-            appSettings.VstsAccount.Returns(appSettingsVstsAccount);
+            appSettings.Account.Returns(appSettingsAccount);
             var systemUnderTest = new SettingsViewModel(appSettings, Substitute.For<ITfProjectCollectionCache>());
 
-            Assert.That(systemUnderTest.VstsAccount, Is.EqualTo(appSettingsVstsAccount));
+            Assert.That(systemUnderTest.Account, Is.EqualTo(appSettingsAccount));
         }
 
         [Test]
         public void TestSelectedProjectGetter_WhenProjectIsNotInProjects_ReturnsNull()
         {
-            var vstsAccount = "fake-account";
+            var account = "fake-account";
             var appSettings = Substitute.For<IAppSettings>();
-            appSettings.VstsAccount.Returns(vstsAccount);
+            appSettings.Account.Returns(account);
             appSettings.ProjectId.Returns(Guid.NewGuid());
             var tpc = Substitute.For<ITfProjectCollection>();
             tpc.Projects.Returns(Enumerable.Empty<ITfProject>());
             var tpcCache = Substitute.For<ITfProjectCollectionCache>();
-            tpcCache.GetProjectCollection(vstsAccount).Returns(tpc);
+            tpcCache.GetProjectCollection(account).Returns(tpc);
             var systemUnderTest = new SettingsViewModel(appSettings, tpcCache);
 
             Assert.That(systemUnderTest.SelectedProject, Is.Null);
@@ -178,13 +178,13 @@ namespace PullRequestMonitor.UnitTest.ViewModel
         [Test]
         public async Task TestRefreshProjects_CallsTpcRetrieveProjects()
         {
-            const string vstsAccount = "say-what";
+            const string account = "say-what";
             var tpc = Substitute.For<ITfProjectCollection>();
             tpc.ProjectRetrievalStatus.Returns(RetrievalStatus.Unstarted);
             var tpcCache = Substitute.For<ITfProjectCollectionCache>();
-            tpcCache.GetProjectCollection(vstsAccount).Returns(tpc);
+            tpcCache.GetProjectCollection(account).Returns(tpc);
             var appSettings = Substitute.For<IAppSettings>();
-            appSettings.VstsAccount.Returns(vstsAccount);
+            appSettings.Account.Returns(account);
             var systemUnderTest = new SettingsViewModel(appSettings, tpcCache);
 
             systemUnderTest.RefreshProjects();

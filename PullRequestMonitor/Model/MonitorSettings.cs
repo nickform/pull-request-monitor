@@ -34,7 +34,7 @@ namespace PullRequestMonitor.Model
         {
             get
             {
-                if (_appSettings.VstsAccount == "" || _appSettings.ProjectId == Guid.Empty)
+                if (_appSettings.Account == "" || _appSettings.ProjectId == Guid.Empty)
                 {
                     return Enumerable.Empty<MonitoredProjectSettings>();
                 }
@@ -44,7 +44,7 @@ namespace PullRequestMonitor.Model
                     new MonitoredProjectSettings
                     {
                         Id = _appSettings.ProjectId,
-                        VstsAccount = _appSettings.VstsAccount,
+                        Account = _appSettings.Account,
                         RepoNameRegexp = _appSettings.RepoNamePattern
                     }
                 };

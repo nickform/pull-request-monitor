@@ -34,7 +34,7 @@ namespace PullRequestMonitor.ViewModel
                 _teamProjectCollection.ProjectRetrievalCompleted -= OnProjectRetrievalCompleted;
             }
 
-            _teamProjectCollection = _projectCollectionCache.GetProjectCollection(_model.VstsAccount);
+            _teamProjectCollection = _projectCollectionCache.GetProjectCollection(_model.Account);
 
             _teamProjectCollection.ProjectRetrievalCompleted += OnProjectRetrievalCompleted;
 
@@ -45,14 +45,14 @@ namespace PullRequestMonitor.ViewModel
             OnPropertyChanged(nameof(HasSelectedProject));
         }
 
-        public string VstsAccount
+        public string Account
         {
-            get => _model.VstsAccount;
+            get => _model.Account;
             set
             {
-                if (value == _model.VstsAccount) return;
+                if (value == _model.Account) return;
 
-                _model.VstsAccount = value;
+                _model.Account = value;
                 SetTeamProjectCollection();
             }
         }

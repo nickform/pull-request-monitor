@@ -8,15 +8,15 @@ namespace PullRequestMonitor.UnitTest.Model
     class MonitoredProjectSettingsTest
     {
         [Test]
-        public void TestCanSetAndGetVstsAccount()
+        public void TestCanSetAndGetAccount()
         {
             var systemUnderTest = new MonitoredProjectSettings();
-            Assert.That(systemUnderTest.VstsAccount, Is.Null);
+            Assert.That(systemUnderTest.Account, Is.Null);
 
             var testAccount = "madeup";
-            systemUnderTest.VstsAccount = testAccount;
+            systemUnderTest.Account = testAccount;
 
-            Assert.That(systemUnderTest.VstsAccount, Is.EqualTo(testAccount));
+            Assert.That(systemUnderTest.Account, Is.EqualTo(testAccount));
         }
 
         [Test]
@@ -77,26 +77,26 @@ namespace PullRequestMonitor.UnitTest.Model
         }
 
         [Test]
-        public void TestEquals_WhenVstsAccountsAreDifferent_ReturnsFalse()
+        public void TestEquals_WhenAccountsAreDifferent_ReturnsFalse()
         {
             var systemUnderTest1 = new MonitoredProjectSettings();
             var systemUnderTest2 = new MonitoredProjectSettings();
 
-            systemUnderTest1.VstsAccount = "anything";
-            systemUnderTest2.VstsAccount = "anything-else";
+            systemUnderTest1.Account = "anything";
+            systemUnderTest2.Account = "anything-else";
             systemUnderTest1.Id = systemUnderTest2.Id = Guid.NewGuid();
 
             Assert.That(systemUnderTest1.Equals(systemUnderTest2), Is.False);
         }
 
         [Test]
-        public void TestEquals_WhenVstsAccountsAreSame_ReturnsTrue()
+        public void TestEquals_WhenAccountsAreSame_ReturnsTrue()
         {
             var systemUnderTest1 = new MonitoredProjectSettings();
             var systemUnderTest2 = new MonitoredProjectSettings();
 
-            systemUnderTest1.VstsAccount = "anything";
-            systemUnderTest2.VstsAccount = "anything";
+            systemUnderTest1.Account = "anything";
+            systemUnderTest2.Account = "anything";
             systemUnderTest1.Id = systemUnderTest2.Id = Guid.NewGuid();
 
             Assert.That(systemUnderTest1.Equals(systemUnderTest2), Is.True);
@@ -108,7 +108,7 @@ namespace PullRequestMonitor.UnitTest.Model
             var systemUnderTest1 = new MonitoredProjectSettings();
             var systemUnderTest2 = new MonitoredProjectSettings();
 
-            systemUnderTest1.VstsAccount = systemUnderTest2.VstsAccount = "anything";
+            systemUnderTest1.Account = systemUnderTest2.Account = "anything";
             systemUnderTest1.Id = Guid.NewGuid();
             systemUnderTest2.Id = Guid.NewGuid();
 
@@ -122,7 +122,7 @@ namespace PullRequestMonitor.UnitTest.Model
             var systemUnderTest1 = new MonitoredProjectSettings();
             var systemUnderTest2 = new MonitoredProjectSettings();
 
-            systemUnderTest1.VstsAccount = systemUnderTest2.VstsAccount = "anything";
+            systemUnderTest1.Account = systemUnderTest2.Account = "anything";
             systemUnderTest1.Id = Guid.Parse(testGuidString);
             systemUnderTest2.Id = Guid.Parse(testGuidString);
 

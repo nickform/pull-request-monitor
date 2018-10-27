@@ -15,7 +15,7 @@ namespace PullRequestMonitor
         }
 
         public event EventHandler SettingsChanged;
-        public string VstsAccount
+        public string Account
         {
             get => Properties.Settings.Default.VstsAccount;
             set

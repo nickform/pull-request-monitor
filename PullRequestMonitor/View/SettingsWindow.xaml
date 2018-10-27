@@ -33,16 +33,14 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Row="0" Padding="5">VSTS Account:</TextBlock>
+            <TextBlock Grid.Row="0" Padding="5">Azure DevOps Account:</TextBlock>
             <StackPanel Grid.Row="0" Grid.Column="1" Margin="0 0 5 0" Orientation="Horizontal">
-                <TextBlock Padding="0 5 1 5">https://</TextBlock>
-                <TextBox Name="vstsAccountTextBox" Width="120" VerticalAlignment="Center"
-                         Padding="0 0 2 0" TextAlignment="Right" 
-                         Text="{Binding Mode=TwoWay, Path=VstsAccount}"/>
-                <TextBlock Padding="1 5">.VisualStudio.com</TextBlock>
+                <TextBlock Padding="0 5 1 5">https://dev.azure.com/</TextBlock>
+                <TextBox Name="accountTextBox" Width="149" VerticalAlignment="Center"
+                         Padding="0 0 2 0" Text="{Binding Mode=TwoWay, Path=Account}"/>
             </StackPanel>
 
-            <TextBlock Grid.Row="1" Padding="5">Project:</TextBlock>
+            <TextBlock Grid.Row="1" Padding="5">Project name:</TextBlock>
             <ComboBox Grid.Row="1" Grid.Column="1" Margin="0 3 5 3"
                       IsEditable="True" TextSearch.TextPath="ProjectName"
                       ItemsSource="{Binding Path=Projects}" SelectedItem="{Binding Mode=TwoWay, Path=SelectedProject}"
@@ -58,7 +56,7 @@
             <TextBlock Grid.Row="2" Padding="5">Repository name pattern:</TextBlock>
             <StackPanel Grid.Row="2" Grid.Column="1" Margin="0 0 5 0" Orientation="Horizontal"
                          IsEnabled="{Binding Mode=OneWay, Path=HasSelectedProject}">
-                <TextBox Name="repoNamePatternTextBox" Width="140" VerticalAlignment="Center" Padding="0 0 2 0" TextAlignment="Right"
+                <TextBox Name="repoNamePatternTextBox" Width="190" VerticalAlignment="Center" Padding="0 0 2 0" TextAlignment="Right"
                          Text="{Binding Mode=TwoWay, Path=RepoNamePattern, UpdateSourceTrigger=Explicit}" />
                 <TextBlock Padding="1 5">(.git)*</TextBlock>
             </StackPanel>

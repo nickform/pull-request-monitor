@@ -12,10 +12,10 @@ namespace PullRequestMonitor.UnitTest.Model
         private static readonly int[] pollIntervals = { 1, 10, 7, 32 };
 
         [Test]
-        public void TestProjects_WhenAppSettingsVstsAccountIsEmpty_IsEmpty()
+        public void TestProjects_WhenAppSettingsAccountIsEmpty_IsEmpty()
         {
             var appSettings = Substitute.For<IAppSettings>();
-            appSettings.VstsAccount.Returns("");
+            appSettings.Account.Returns("");
             appSettings.ProjectId.Returns(Guid.NewGuid());
             var systemUnderTest = new MonitorSettings(appSettings);
 
@@ -26,7 +26,7 @@ namespace PullRequestMonitor.UnitTest.Model
         public void TestProjects_WhenAppSettingsProjectIdIsEmptyGuid_IsEmpty()
         {
             var appSettings = Substitute.For<IAppSettings>();
-            appSettings.VstsAccount.Returns("not-empty");
+            appSettings.Account.Returns("not-empty");
             appSettings.ProjectId.Returns(Guid.Empty);
             var systemUnderTest = new MonitorSettings(appSettings);
 
@@ -37,7 +37,7 @@ namespace PullRequestMonitor.UnitTest.Model
         public void TestProjects_WhenAppSettingsProjectIdIsNotEmptyGuid_ContainsSingleProjectIdentifier()
         {
             var appSettings = Substitute.For<IAppSettings>();
-            appSettings.VstsAccount.Returns("not-an-account");
+            appSettings.Account.Returns("not-an-account");
             appSettings.ProjectId.Returns(Guid.NewGuid());
             var systemUnderTest = new MonitorSettings(appSettings);
 
@@ -45,18 +45,18 @@ namespace PullRequestMonitor.UnitTest.Model
         }
 
         [Test]
-        public void TestProjects_ProjectIdentifierVstsAccount_MatchesAppSettingsVstsAccount()
+        public void TestProjects_ProjectIdentifierAccount_MatchesAppSettingsAccount()
         {
             var appSettings = Substitute.For<IAppSettings>();
-            var expectedVstsAccount = "this-would-never-be-right-by-accident";
-            appSettings.VstsAccount.Returns(expectedVstsAccount);
+            var expectedAccount = "this-would-never-be-right-by-accident";
+            appSettings.Account.Returns(expectedAccount);
             appSettings.ProjectId.Returns(Guid.NewGuid());
             var systemUnderTest = new MonitorSettings(appSettings);
 
             // ReSharper disable once PossibleNullReferenceException
-            var actualServerBaseUri = systemUnderTest.Projects.FirstOrDefault().VstsAccount;
+            var actualServerBaseUri = systemUnderTest.Projects.FirstOrDefault().Account;
 
-            Assert.That(actualServerBaseUri, Is.EqualTo(expectedVstsAccount));
+            Assert.That(actualServerBaseUri, Is.EqualTo(expectedAccount));
         }
 
         [Test]
@@ -64,7 +64,7 @@ namespace PullRequestMonitor.UnitTest.Model
         {
             var appSettings = Substitute.For<IAppSettings>();
             var expectedProjectId = Guid.NewGuid();
-            appSettings.VstsAccount.Returns("account");
+            appSettings.Account.Returns("account");
             appSettings.ProjectId.Returns(expectedProjectId);
             var systemUnderTest = new MonitorSettings(appSettings);
 
