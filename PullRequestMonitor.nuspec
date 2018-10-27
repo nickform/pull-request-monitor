@@ -9,7 +9,7 @@
     <projectUrl>https://github.com/nickform/pull-request-monitor</projectUrl>
     <iconUrl>https://github.com/nickform/pull-request-monitor/releases/download/v0.1.5/pulley.ico</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>A Windows system tray app for watching VSTS pull requests.</description>
+    <description>A Windows system tray app for watching Azure DevOps pull requests.</description>
     <copyright>Copyright 2018</copyright>
   </metadata>
   <files>
