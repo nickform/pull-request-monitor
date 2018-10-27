@@ -34,11 +34,20 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Row="0" Padding="5">Azure DevOps Account:</TextBlock>
-            <StackPanel Grid.Row="0" Grid.Column="1" Margin="0 0 5 0" Orientation="Horizontal">
-                <TextBlock Padding="0 5 1 5">https://dev.azure.com/</TextBlock>
-                <TextBox Name="accountTextBox" Width="149" VerticalAlignment="Center"
+            <Grid Grid.Row="0" Grid.Column="1" Margin="0 0 5 0" HorizontalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Padding="0 5 1 5">https://dev.azure.com/</TextBlock>
+                <TextBox Grid.Column="1" Name="accountTextBox" HorizontalAlignment="Stretch" VerticalAlignment="Center"
                          Padding="0 0 2 0" Text="{Binding Mode=TwoWay, Path=Account}"/>
-            </StackPanel>
+            </Grid>
 
             <TextBlock Grid.Row="1" Padding="5">Project name:</TextBlock>
             <ComboBox Grid.Row="1" Grid.Column="1" Margin="0 3 5 3"
