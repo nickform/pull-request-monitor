@@ -5,6 +5,7 @@
 
     <ContextMenu x:Shared="false" x:Key="SystemTrayIconMenu">
         <MenuItem Header="Settings..." Command="{Binding ShowSettingsCommand}" />
+        <MenuItem Header="About..." Command="{Binding ShowAboutWindowCommand}"/>
         <Separator />
         <MenuItem Header="Exit" Command="{Binding ExitApplicationCommand}" />
     </ContextMenu>

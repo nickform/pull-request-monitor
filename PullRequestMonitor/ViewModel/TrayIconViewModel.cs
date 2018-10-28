@@ -10,6 +10,7 @@ namespace PullRequestMonitor.ViewModel
     {
         ICommand ShowSettingsCommand { get; }
         ICommand ShowMonitorWindowCommand { get; }
+        ICommand ShowAboutWindowCommand { get;  }
         ICommand ExitApplicationCommand { get; }
         ITrayIcon Model { get; set; }
         string TooltipText { get; }
@@ -53,6 +54,11 @@ namespace PullRequestMonitor.ViewModel
         /// Toggles visibility of the Monitor window.
         /// </summary>
         public ICommand ShowMonitorWindowCommand => _applicationActions.ShowMonitorWindowCommand;
+
+        /// <summary>
+        /// Shows the about window.
+        /// </summary>
+        public ICommand ShowAboutWindowCommand => _applicationActions.ShowAboutWindowCommand;
 
         /// <summary>
         /// Closes the application.

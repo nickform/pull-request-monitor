@@ -16,7 +16,8 @@ namespace PullRequestMonitor.UnitTest
         {
             var systemUnderTest = new ApplicationActions(Substitute.For<IMonitor>(), new MonitorWindow(),
                 Substitute.For<IMonitorViewModelFactory>(), new SettingsWindow(),
-                new SettingsViewModel(Substitute.For<IAppSettings>(), Substitute.For<ITfProjectCollectionCache>()));
+                new SettingsViewModel(Substitute.For<IAppSettings>(), Substitute.For<ITfProjectCollectionCache>()),
+                new AboutWindow());
 
             Assert.That(systemUnderTest.ShowSettingsCommand, Is.Not.Null);
         }
@@ -26,9 +27,21 @@ namespace PullRequestMonitor.UnitTest
         {
             var systemUnderTest = new ApplicationActions(Substitute.For<IMonitor>(), new MonitorWindow(),
                 Substitute.For<IMonitorViewModelFactory>(), new SettingsWindow(),
-                new SettingsViewModel(Substitute.For<IAppSettings>(), Substitute.For<ITfProjectCollectionCache>()));
+                new SettingsViewModel(Substitute.For<IAppSettings>(), Substitute.For<ITfProjectCollectionCache>()),
+                new AboutWindow());
 
             Assert.That(systemUnderTest.ShowMonitorWindowCommand, Is.Not.Null);
+        }
+
+        [Test]
+        public void TestShowAboutWindowCommand_IsNotNull()
+        {
+            var systemUnderTest = new ApplicationActions(Substitute.For<IMonitor>(), new MonitorWindow(),
+                Substitute.For<IMonitorViewModelFactory>(), new SettingsWindow(),
+                new SettingsViewModel(Substitute.For<IAppSettings>(), Substitute.For<ITfProjectCollectionCache>()),
+                new AboutWindow());
+
+            Assert.That(systemUnderTest.ShowAboutWindowCommand, Is.Not.Null);
         }
 
         [Test]
@@ -36,7 +49,8 @@ namespace PullRequestMonitor.UnitTest
         {
             var systemUnderTest = new ApplicationActions(Substitute.For<IMonitor>(), new MonitorWindow(),
                 Substitute.For<IMonitorViewModelFactory>(), new SettingsWindow(),
-                new SettingsViewModel(Substitute.For<IAppSettings>(), Substitute.For<ITfProjectCollectionCache>()));
+                new SettingsViewModel(Substitute.For<IAppSettings>(), Substitute.For<ITfProjectCollectionCache>()),
+                new AboutWindow());
 
             Assert.That(systemUnderTest.ExitApplicationCommand, Is.Not.Null);
         }

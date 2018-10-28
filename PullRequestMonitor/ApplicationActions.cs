@@ -12,6 +12,7 @@ namespace PullRequestMonitor
     {
         ICommand ShowSettingsCommand { get; }
         ICommand ShowMonitorWindowCommand { get; }
+        ICommand ShowAboutWindowCommand { get; }
         ICommand ExitApplicationCommand { get; }
         void UpdateMonitorViewModel();
     }
@@ -22,10 +23,11 @@ namespace PullRequestMonitor
         private readonly MonitorWindow _monitorWindow;
         private readonly IMonitorViewModelFactory _monitorViewModelFactory;
         private readonly SettingsWindow _settingsWindow;
+        private readonly AboutWindow _aboutWindow;
         private readonly SettingsViewModel _settingsViewModel;
         private readonly Lazy<MonitorWindowViewModel> _monitorViewModel;
 
-        public ApplicationActions(IMonitor monitor, MonitorWindow  monitorWindow, IMonitorViewModelFactory monitorViewModelFactory, SettingsWindow settingsWindow, SettingsViewModel settingsViewModel)
+        public ApplicationActions(IMonitor monitor, MonitorWindow  monitorWindow, IMonitorViewModelFactory monitorViewModelFactory, SettingsWindow settingsWindow, SettingsViewModel settingsViewModel, AboutWindow aboutWindow)
         {
             _monitor = monitor;
             _monitorWindow = monitorWindow;
@@ -34,6 +36,7 @@ namespace PullRequestMonitor
             _settingsWindow = settingsWindow;
             _settingsViewModel = settingsViewModel;
             _settingsWindow.DataContext = _settingsViewModel;
+            _aboutWindow = aboutWindow;
 
             _monitorViewModel = new Lazy<MonitorWindowViewModel>(InitializeMonitorViewModel);
         }
@@ -83,6 +86,23 @@ namespace PullRequestMonitor
         private void MonitorWindowOnDeactivated(object sender, EventArgs eventArgs)
         {
             _monitorWindow.Hide();
+        }
+
+        public ICommand ShowAboutWindowCommand
+        {
+            get
+            {
+                return new DelegateCommand
+                {
+                    CanExecuteFunc = () => !_aboutWindow.IsVisible,
+                    CommandAction = () =>
+                    {
+                        _aboutWindow.Topmost = true;
+                        _aboutWindow.Show();
+                        _aboutWindow.Activate();
+                    }
+                };
+            }
         }
 
         public ICommand ExitApplicationCommand

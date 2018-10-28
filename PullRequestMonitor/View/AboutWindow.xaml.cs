@@ -14,7 +14,7 @@ namespace PullRequestMonitor.View
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            Close();
+            Hide();
         }
     }
 }
