@@ -23,12 +23,12 @@ namespace PullRequestMonitor.UnitTest.Factories
         [Test]
         public void TestGetServer_ForAccountNotInCache_CallsServerFactoryWithUri()
         {
-            const string vstsAccount = "vsts";
-            var serverUri = VstsServerURL.GetVstsServerURL(vstsAccount);
+            const string account = "pullrequestmonitor";
+            var serverUri = ServerUrl.GetServerURL(account);
             var tpcFactory = Substitute.For<ITfProjectCollectionFactory>();
             var systemUnderTest = new TfProjectCollectionCache(tpcFactory);
 
-            systemUnderTest.GetProjectCollection(vstsAccount);
+            systemUnderTest.GetProjectCollection(account);
 
             tpcFactory.Received().Create(serverUri);
         }
@@ -36,16 +36,16 @@ namespace PullRequestMonitor.UnitTest.Factories
         [Test]
         public void TestGetServer_ForAccountInCache_DoesNotCallServerFactory()
         {
-            const string vstsAccount = "test-account";
-            var expectedServerUrl = VstsServerURL.GetVstsServerURL(vstsAccount);
+            const string account = "test-account";
+            var expectedServerUrl = ServerUrl.GetServerURL(account);
             var tpcFactory = Substitute.For<ITfProjectCollectionFactory>();
             var systemUnderTest = new TfProjectCollectionCache(tpcFactory);
-            systemUnderTest.GetProjectCollection(vstsAccount);
+            systemUnderTest.GetProjectCollection(account);
             // Check that the factory was called once by now...
             tpcFactory.Received().Create(expectedServerUrl);
             Assert.That(tpcFactory.ReceivedCalls().Count(), Is.EqualTo(1));
 
-            systemUnderTest.GetProjectCollection(vstsAccount);
+            systemUnderTest.GetProjectCollection(account);
 
             Assert.That(tpcFactory.ReceivedCalls().Count(), Is.EqualTo(1));
         }
@@ -53,18 +53,18 @@ namespace PullRequestMonitor.UnitTest.Factories
         [Test]
         public void TestGetServer_ForAccountInCache_ReturnsCachedValue()
         {
-            const string vstsAccount = "omnipave";
-            var serverUri = VstsServerURL.GetVstsServerURL(vstsAccount);
+            const string account = "omnipave";
+            var serverUri = ServerUrl.GetServerURL(account);
             var tpcFactory = Substitute.For<ITfProjectCollectionFactory>();
             var expected = Substitute.For<ITfProjectCollection>();
             tpcFactory.Create(serverUri).Returns(expected);
             var systemUnderTest = new TfProjectCollectionCache(tpcFactory);
-            systemUnderTest.GetProjectCollection(vstsAccount);
+            systemUnderTest.GetProjectCollection(account);
             // Check that the factory was called once by now...
             tpcFactory.Received().Create(serverUri);
             Assert.That(tpcFactory.ReceivedCalls().Count(), Is.EqualTo(1));
 
-            var actual = systemUnderTest.GetProjectCollection(vstsAccount);
+            var actual = systemUnderTest.GetProjectCollection(account);
 
             Assert.That(actual, Is.EqualTo(expected));
         }

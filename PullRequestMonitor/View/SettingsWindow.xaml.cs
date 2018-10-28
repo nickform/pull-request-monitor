@@ -24,8 +24,8 @@ namespace PullRequestMonitor.View
         private void SettingsWindow_OnMouseDown(object sender, MouseButtonEventArgs e)
         {
             Keyboard.ClearFocus();
-            var vstsAccountBinding = vstsAccountTextBox.GetBindingExpression(TextBox.TextProperty);
-            vstsAccountBinding.UpdateSource();
+            var accountBinding = accountTextBox.GetBindingExpression(TextBox.TextProperty);
+            accountBinding.UpdateSource();
             var repoNameBinding = repoNamePatternTextBox.GetBindingExpression(TextBox.TextProperty);
             repoNameBinding.UpdateSource();
         }

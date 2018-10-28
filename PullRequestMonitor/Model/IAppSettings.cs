@@ -4,7 +4,7 @@ namespace PullRequestMonitor.Model
 {
     public interface IAppSettings
     {
-        string VstsAccount { get; set; }
+        string Account { get; set; }
         Guid ProjectId { get; set; }
         string RepoNamePattern { get; set; }
         int PollIntervalSeconds { get; }

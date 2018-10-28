@@ -109,7 +109,7 @@ namespace PullRequestMonitor.Model
         {
             foreach (var projectSettings in monitoredProjectSettings)
             {
-                var projectCollection = _tfProjectCollectionCache.GetProjectCollection(projectSettings.VstsAccount);
+                var projectCollection = _tfProjectCollectionCache.GetProjectCollection(projectSettings.Account);
 
                 if (projectCollection.ProjectRetrievalStatus != RetrievalStatus.Suceeded)
                 {

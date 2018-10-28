@@ -28,7 +28,7 @@ namespace PullRequestMonitor.UnitTest.Model
             _monitorSettings = Substitute.For<IMonitorSettings>();
             _tfProjectCollectionCache = Substitute.For<ITfProjectCollectionCache>();
             _aMonitoredProjectSettings =
-                new MonitoredProjectSettings {Id = Guid.NewGuid(), VstsAccount = "b"};
+                new MonitoredProjectSettings {Id = Guid.NewGuid(), Account = "b"};
             _nameRegexpRepositoryFilterFactory = Substitute.For<INameRegexpRepositoryFilterFactory>();
             _logger = Substitute.For<ILogger>();
         }
@@ -83,9 +83,9 @@ namespace PullRequestMonitor.UnitTest.Model
         {
             var projectSettingses = new[]
             {
-                new MonitoredProjectSettings { VstsAccount = "1st server a/c", Id = Guid.NewGuid() },
-                new MonitoredProjectSettings { VstsAccount = "2nd server a/c", Id = Guid.NewGuid() },
-                new MonitoredProjectSettings { VstsAccount = "3rd server a/c", Id = Guid.NewGuid() },
+                new MonitoredProjectSettings { Account = "1st server a/c", Id = Guid.NewGuid() },
+                new MonitoredProjectSettings { Account = "2nd server a/c", Id = Guid.NewGuid() },
+                new MonitoredProjectSettings { Account = "3rd server a/c", Id = Guid.NewGuid() },
             };
             _monitorSettings.Projects.Returns(projectSettingses);
             var tfsServer = Substitute.For<ITfProjectCollection>();
@@ -97,7 +97,7 @@ namespace PullRequestMonitor.UnitTest.Model
 
             foreach (var projectIdentifier in projectSettingses)
             {
-                _tfProjectCollectionCache.Received().GetProjectCollection(projectIdentifier.VstsAccount);
+                _tfProjectCollectionCache.Received().GetProjectCollection(projectIdentifier.Account);
             }
         }
 
@@ -106,9 +106,9 @@ namespace PullRequestMonitor.UnitTest.Model
         {
             var projectSettingses = new[]
             {
-                new MonitoredProjectSettings { VstsAccount = "1st server url", Id = Guid.NewGuid() },
-                new MonitoredProjectSettings { VstsAccount = "2nd server url", Id = Guid.NewGuid() },
-                new MonitoredProjectSettings { VstsAccount = "3rd server url", Id = Guid.NewGuid() },
+                new MonitoredProjectSettings { Account = "1st server url", Id = Guid.NewGuid() },
+                new MonitoredProjectSettings { Account = "2nd server url", Id = Guid.NewGuid() },
+                new MonitoredProjectSettings { Account = "3rd server url", Id = Guid.NewGuid() },
             };
             _monitorSettings.Projects.Returns(projectSettingses);
             var tfsServer = Substitute.For<ITfProjectCollection>();
@@ -129,9 +129,9 @@ namespace PullRequestMonitor.UnitTest.Model
         {
             var projectSettingses = new[]
             {
-                new MonitoredProjectSettings { VstsAccount = "1st server url", Id = Guid.NewGuid() },
-                new MonitoredProjectSettings { VstsAccount = "2nd server url", Id = Guid.NewGuid(), RepoNameRegexp = "*"},
-                new MonitoredProjectSettings { VstsAccount = "3rd server url", Id = Guid.NewGuid(), RepoNameRegexp = "lasdf"},
+                new MonitoredProjectSettings { Account = "1st server url", Id = Guid.NewGuid() },
+                new MonitoredProjectSettings { Account = "2nd server url", Id = Guid.NewGuid(), RepoNameRegexp = "*"},
+                new MonitoredProjectSettings { Account = "3rd server url", Id = Guid.NewGuid(), RepoNameRegexp = "lasdf"},
             };
             _monitorSettings.Projects.Returns(projectSettingses);
             var tfsServer = Substitute.For<ITfProjectCollection>();
@@ -209,7 +209,7 @@ namespace PullRequestMonitor.UnitTest.Model
             _monitorSettings.Projects.Returns(new[] { new MonitoredProjectSettings() });
             var tfsServer = Substitute.For<ITfProjectCollection>();
             tfsServer.GetProject(Arg.Any<Guid>()).Returns(tfProject);
-            _tfProjectCollectionCache.GetProjectCollection(_aMonitoredProjectSettings.VstsAccount).Returns(tfsServer);
+            _tfProjectCollectionCache.GetProjectCollection(_aMonitoredProjectSettings.Account).Returns(tfsServer);
             var systemUnderTest = new Monitor(_monitorSettings, _tfProjectCollectionCache, _nameRegexpRepositoryFilterFactory, _logger);
 
             Assert.That(systemUnderTest.Status, Is.EqualTo(MonitorStatus.AwaitingFirstUpdate));

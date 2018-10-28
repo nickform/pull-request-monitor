@@ -12,7 +12,7 @@ namespace PullRequestMonitor.Model
         /// The base URI for the server where the project is
         /// hosted.
         /// </summary>
-        public string VstsAccount { get; set; }
+        public string Account { get; set; }
         /// <summary>
         /// The Id of the project to be monitored.
         /// </summary>
@@ -27,7 +27,7 @@ namespace PullRequestMonitor.Model
 
         private bool Equals(MonitoredProjectSettings other)
         {
-            return Equals(VstsAccount, other.VstsAccount) && Id.Equals(other.Id);
+            return Equals(Account, other.Account) && Id.Equals(other.Id);
         }
 
         public override bool Equals(object obj)
@@ -42,7 +42,7 @@ namespace PullRequestMonitor.Model
         {
             unchecked
             {
-                return ((VstsAccount != null ? VstsAccount.GetHashCode() : 0)*397) ^ Id.GetHashCode();
+                return ((Account != null ? Account.GetHashCode() : 0)*397) ^ Id.GetHashCode();
             }
         }
     }

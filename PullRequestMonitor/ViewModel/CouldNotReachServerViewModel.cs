@@ -14,7 +14,7 @@ namespace PullRequestMonitor.ViewModel
             _settings = settings;
         }
 
-        public string ServerWebViewUrl => VstsServerURL.GetVstsServerURL(_settings.VstsAccount);
+        public string ServerWebViewUrl => ServerUrl.GetServerURL(_settings.Account);
         public ICommand ShowSettingsCommand => _applicationActions.ShowSettingsCommand;
 
         public void Update() {}

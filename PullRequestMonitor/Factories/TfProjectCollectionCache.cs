@@ -6,7 +6,7 @@ namespace PullRequestMonitor.Factories
 {
     public interface ITfProjectCollectionCache
     {
-        ITfProjectCollection GetProjectCollection(string vstsAccount);
+        ITfProjectCollection GetProjectCollection(string account);
     }
 
     public class TfProjectCollectionCache : ITfProjectCollectionCache
@@ -22,17 +22,17 @@ namespace PullRequestMonitor.Factories
             _mutex = new Mutex();
         }
 
-        public ITfProjectCollection GetProjectCollection(string vstsAccount)
+        public ITfProjectCollection GetProjectCollection(string account)
         {
-            if (vstsAccount == "") return NullTeamProjectCollection;
+            if (account == "") return NullTeamProjectCollection;
 
             _mutex.WaitOne();
-            if (!_servers.ContainsKey(vstsAccount))
+            if (!_servers.ContainsKey(account))
             {
-                var serverUrl = VstsServerURL.GetVstsServerURL(vstsAccount);
-                _servers[vstsAccount] = _projectCollectionFactory.Create(serverUrl);
+                var serverUrl = ServerUrl.GetServerURL(account);
+                _servers[account] = _projectCollectionFactory.Create(serverUrl);
             }
-            var tfsServer = _servers[vstsAccount];
+            var tfsServer = _servers[account];
             _mutex.ReleaseMutex();
 
             return tfsServer;
