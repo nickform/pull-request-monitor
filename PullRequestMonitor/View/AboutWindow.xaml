@@ -4,27 +4,47 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PullRequestMonitor.View"
+        xmlns:props="clr-namespace:PullRequestMonitor.Properties"
         mc:Ignorable="d"
-        Title="AboutWindow" Height="200" Width="300"
+        Title="AboutWindow" Height="200" Width="420"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         >
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="66" />
-            <RowDefinition Height="66" />
-            <RowDefinition Height="66" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="95" />
+            <RowDefinition Height="55" />
         </Grid.RowDefinitions>
-        
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="100"/>
-        </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Row="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25">Pull Request Monitor</TextBlock>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="8" />
+            </Grid.RowDefinitions>
 
-        <Button Grid.Row="2" Grid.Column="2" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="ButtonBase_OnClick">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Image Grid.Column="0" Grid.RowSpan="2" Height="50" Margin="10" Source="../Resources/pulley.ico" VerticalAlignment="Top"></Image>
+            <TextBlock Grid.Column="1" Margin="0 5 0 0"  HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20">
+                <Run>Pull Request Monitor</Run>
+                <Run FontSize="16">(</Run><!--
+                --><Run FontSize="16">v?.?.?</Run><!--
+                --><Run FontSize="16">)</Run>
+            </TextBlock>
+            <TextBlock Grid.Row="1" Grid.Column="1">
+                <Run>Hosted at</Run>
+                <Hyperlink x:Name="HomepageLink" RequestNavigate="Hyperlink_OnRequestNavigate">
+                    <Run Text="{x:Static props:Resources.ProjectHomepage}"></Run>
+                </Hyperlink>
+            </TextBlock>
+        </Grid>
+
+        <Button Grid.Row="2" Grid.Column="2" Margin="0 0 10 0" Height="25" HorizontalAlignment="Right" VerticalAlignment="Top" Click="ButtonBase_OnClick">
             Close
         </Button>
     </Grid>
