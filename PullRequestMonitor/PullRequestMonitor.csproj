@@ -84,6 +84,9 @@
     <Compile Include="ViewModel\SingleProjectViewModel.cs" />
     <Compile Include="ViewModel\ProjectViewModel.cs" />
     <Compile Include="ViewModel\UnrecognisedErrorViewModel.cs" />
+    <Compile Include="View\AboutWindow.xaml.cs">
+      <DependentUpon>AboutWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\CouldNotReachServerView.xaml.cs">
       <DependentUpon>CouldNotReachServerView.xaml</DependentUpon>
     </Compile>
@@ -106,6 +109,10 @@
       <DependentUpon>SingleProjectView.xaml</DependentUpon>
     </Compile>
     <Compile Include="WindsorInstaller.cs" />
+    <Page Include="View\AboutWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\CouldNotReachServerView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
