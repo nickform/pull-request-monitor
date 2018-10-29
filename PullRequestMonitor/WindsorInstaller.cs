@@ -35,6 +35,7 @@ namespace PullRequestMonitor
                 Component.For<IMonitorSettings>().ImplementedBy<MonitorSettings>(),
                 Component.For<SettingsViewModel>(),
                 Component.For<SettingsWindow>().LifestyleTransient(),
+                Component.For<About>().ImplementedBy<About>().LifestyleSingleton(),
                 Component.For<AboutWindow>().LifestyleSingleton(),
                 Component.For<NameRegexpRepositoryFilter>().LifestyleTransient(),
                 Component.For<INameRegexpRepositoryFilterFactory>().AsFactory(),

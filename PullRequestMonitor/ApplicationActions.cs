@@ -5,6 +5,7 @@ using PullRequestMonitor.Factories;
 using PullRequestMonitor.Model;
 using PullRequestMonitor.View;
 using PullRequestMonitor.ViewModel;
+using Squirrel;
 
 namespace PullRequestMonitor
 {
@@ -27,7 +28,7 @@ namespace PullRequestMonitor
         private readonly SettingsViewModel _settingsViewModel;
         private readonly Lazy<MonitorWindowViewModel> _monitorViewModel;
 
-        public ApplicationActions(IMonitor monitor, MonitorWindow  monitorWindow, IMonitorViewModelFactory monitorViewModelFactory, SettingsWindow settingsWindow, SettingsViewModel settingsViewModel, AboutWindow aboutWindow)
+        public ApplicationActions(IMonitor monitor, MonitorWindow  monitorWindow, IMonitorViewModelFactory monitorViewModelFactory, SettingsWindow settingsWindow, SettingsViewModel settingsViewModel, AboutWindow aboutWindow, About about)
         {
             _monitor = monitor;
             _monitorWindow = monitorWindow;
@@ -37,6 +38,7 @@ namespace PullRequestMonitor
             _settingsViewModel = settingsViewModel;
             _settingsWindow.DataContext = _settingsViewModel;
             _aboutWindow = aboutWindow;
+            _aboutWindow.DataContext = about;
 
             _monitorViewModel = new Lazy<MonitorWindowViewModel>(InitializeMonitorViewModel);
         }

@@ -17,7 +17,7 @@ namespace PullRequestMonitor.UnitTest
             var systemUnderTest = new ApplicationActions(Substitute.For<IMonitor>(), new MonitorWindow(),
                 Substitute.For<IMonitorViewModelFactory>(), new SettingsWindow(),
                 new SettingsViewModel(Substitute.For<IAppSettings>(), Substitute.For<ITfProjectCollectionCache>()),
-                new AboutWindow());
+                new AboutWindow(), Substitute.For<About>());
 
             Assert.That(systemUnderTest.ShowSettingsCommand, Is.Not.Null);
         }
@@ -28,7 +28,7 @@ namespace PullRequestMonitor.UnitTest
             var systemUnderTest = new ApplicationActions(Substitute.For<IMonitor>(), new MonitorWindow(),
                 Substitute.For<IMonitorViewModelFactory>(), new SettingsWindow(),
                 new SettingsViewModel(Substitute.For<IAppSettings>(), Substitute.For<ITfProjectCollectionCache>()),
-                new AboutWindow());
+                new AboutWindow(), Substitute.For<About>());
 
             Assert.That(systemUnderTest.ShowMonitorWindowCommand, Is.Not.Null);
         }
@@ -39,7 +39,7 @@ namespace PullRequestMonitor.UnitTest
             var systemUnderTest = new ApplicationActions(Substitute.For<IMonitor>(), new MonitorWindow(),
                 Substitute.For<IMonitorViewModelFactory>(), new SettingsWindow(),
                 new SettingsViewModel(Substitute.For<IAppSettings>(), Substitute.For<ITfProjectCollectionCache>()),
-                new AboutWindow());
+                new AboutWindow(), Substitute.For<About>());
 
             Assert.That(systemUnderTest.ShowAboutWindowCommand, Is.Not.Null);
         }
@@ -50,7 +50,7 @@ namespace PullRequestMonitor.UnitTest
             var systemUnderTest = new ApplicationActions(Substitute.For<IMonitor>(), new MonitorWindow(),
                 Substitute.For<IMonitorViewModelFactory>(), new SettingsWindow(),
                 new SettingsViewModel(Substitute.For<IAppSettings>(), Substitute.For<ITfProjectCollectionCache>()),
-                new AboutWindow());
+                new AboutWindow(), Substitute.For<About>());
 
             Assert.That(systemUnderTest.ExitApplicationCommand, Is.Not.Null);
         }

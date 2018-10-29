@@ -32,14 +32,14 @@
             <Image Grid.Column="0" Grid.RowSpan="2" Height="50" Margin="10" Source="../Resources/pulley.ico" VerticalAlignment="Top"></Image>
             <TextBlock Grid.Column="1" Margin="0 5 0 0"  HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20">
                 <Run>Pull Request Monitor</Run>
-                <Run FontSize="16">(</Run><!--
-                --><Run FontSize="16">v?.?.?</Run><!--
+                <Run FontSize="16">(v</Run><!--
+                --><Run FontSize="16" Text="{Binding Mode=OneTime, Path=Version}" /><!--
                 --><Run FontSize="16">)</Run>
             </TextBlock>
             <TextBlock Grid.Row="1" Grid.Column="1">
                 <Run>Hosted at</Run>
-                <Hyperlink x:Name="HomepageLink" RequestNavigate="Hyperlink_OnRequestNavigate">
-                    <Run Text="{x:Static props:Resources.ProjectHomepage}"></Run>
+                <Hyperlink RequestNavigate="Hyperlink_OnRequestNavigate" NavigateUri="{Binding Mode=OneTime, Path=ProjectHomepage}">
+                    <Run Text="{Binding Mode=OneTime, Path=ProjectHomepageString}"></Run>
                 </Hyperlink>
             </TextBlock>
         </Grid>

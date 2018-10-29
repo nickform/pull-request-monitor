@@ -35,6 +35,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="About.cs" />
     <Compile Include="ApplicationActions.cs" />
     <Compile Include="Exceptions\ExceptionClassifiers.cs" />
     <Compile Include="Factories\IGitHttpClientFactory.cs" />
