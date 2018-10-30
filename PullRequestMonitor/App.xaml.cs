@@ -120,7 +120,7 @@ namespace PullRequestMonitor
 
         private static UpdateManager GetUpdateManager()
         {
-            var gitHubUpdateManager = UpdateManager.GitHubUpdateManager(PullRequestMonitor.Properties.Resources.SquirrelUrlOrPath);
+            var gitHubUpdateManager = UpdateManager.GitHubUpdateManager(PullRequestMonitor.Properties.Resources.ProjectHomepage);
             gitHubUpdateManager.Wait();
             return gitHubUpdateManager.Result;
         }

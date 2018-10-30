@@ -116,6 +116,15 @@ namespace PullRequestMonitor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to https://github.com/nickform/pull-request-monitor.
+        /// </summary>
+        public static string ProjectHomepage {
+            get {
+                return ResourceManager.GetString("ProjectHomepage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Active.
         /// </summary>
         public static string PullRequestActiveStateName {
@@ -167,15 +176,6 @@ namespace PullRequestMonitor.Properties {
         public static string PullRequestCreationActionPastTense {
             get {
                 return ResourceManager.GetString("PullRequestCreationActionPastTense", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to https://github.com/nickform/pull-request-monitor.
-        /// </summary>
-        public static string SquirrelUrlOrPath {
-            get {
-                return ResourceManager.GetString("SquirrelUrlOrPath", resourceCulture);
             }
         }
         

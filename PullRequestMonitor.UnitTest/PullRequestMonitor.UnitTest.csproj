@@ -55,6 +55,7 @@
     <Compile Include="ViewModel\SingleProjectViewModelTest.cs" />
     <Compile Include="ViewModel\TrayIconViewModelTest.cs" />
     <Compile Include="ViewModel\UnrecognisedErrorViewModelTest.cs" />
+    <Compile Include="View\AboutWindowTest.cs" />
     <Compile Include="View\MonitorWindowTest.cs" />
     <Compile Include="View\SettingsWindowTest.cs" />
     <Compile Include="WindsorInstallerTest.cs" />
