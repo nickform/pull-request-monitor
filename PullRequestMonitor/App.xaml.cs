@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
 using Castle.Windsor;
@@ -84,7 +83,19 @@ namespace PullRequestMonitor
             // ReSharper disable once PossibleNullReferenceException - Happy to crash here if this happens
             _trayIconView.DataContext = _trayIconViewModel;
 
-            Task.Run(() => Update());
+            Task.Run(async () =>
+            {
+                var updated = await Update();
+#if !DEBUG // Don't restart after updating a debug build
+                if (updated)
+                {
+                    if (Current != null && Current.Dispatcher != null)
+                    {
+                        Current.Dispatcher.Invoke(() => { Current.Shutdown(); });
+                    }
+                }
+#endif
+            });
 
             _trayIcon.RunMonitor();
         }
@@ -96,7 +107,14 @@ namespace PullRequestMonitor
             base.OnExit(e);
         }
 
-        private async void Update()
+        /// <summary>
+        /// Looks for a new version of the app and updates to any higher version it finds and, in that case,
+        /// begins a restart.
+        /// </summary>
+        /// <returns>
+        /// true if an update was installed, otherwise false.
+        /// </returns>
+        private async Task<bool> Update()
         {
             try
             {
@@ -107,15 +125,20 @@ namespace PullRequestMonitor
                     if (version == null)
                     {
                         _logger.Info($"{nameof(App)}: UpdateManager found no newer version");
-                    } else {
-                        _logger.Info($"{nameof(App)}: UpdateManager returned version {version.Version}");
+                        return false;
                     }
+
+                    _logger.Info($"{nameof(App)}: UpdateManager returned version {version.Version}; app will restart");
+                    await UpdateManager.RestartAppWhenExited();
+                    return true;
                 }
             }
             catch (Exception e)
             {
                 _logger.Error($"{nameof(App)}: failed to update app due to exception:", e);
             }
+
+            return false;
         }
 
         private static UpdateManager GetUpdateManager()
