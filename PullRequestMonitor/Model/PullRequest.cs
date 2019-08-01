@@ -65,12 +65,26 @@ namespace PullRequestMonitor.Model
             }
         }
 
+        private bool IsDraft
+        {
+            get
+            {
+                if (_pullRequest.IsDraft == null)
+                    return false;
+
+                return (bool)_pullRequest.IsDraft;
+            }
+        
+        }
+
         public int Id => _pullRequest.PullRequestId;
         public string Title
         {
             get
             {
                 string postfix = "";
+                if (IsDraft)
+                    postfix += " [Draft]";
                 if (IsRejected)
                     postfix += " [Rejected]";
                 if (IsWaitingForAuthor)
