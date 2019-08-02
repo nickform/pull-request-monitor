@@ -32,9 +32,9 @@ steps:
   - task: VSBuild@1
     displayName: 'Build solution **\*.sln'
     inputs:
-      solution: '$(Parameters.solution)'
-      platform: '$(BuildPlatform)'
-      configuration: '$(BuildConfiguration)'
+      solution: "$(Parameters.solution)"
+      platform: "$(BuildPlatform)"
+      configuration: "$(BuildConfiguration)"
   - task: VSTest@2
     displayName: "VsTest - testAssemblies"
     inputs:
