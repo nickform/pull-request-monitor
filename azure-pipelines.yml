@@ -30,11 +30,11 @@ steps:
     inputs:
       restoreSolution: "$(Parameters.solution)"
   - task: VSBuild@1
+    displayName: 'Build solution **\*.sln'
     inputs:
-      solution: "$(solution)"
-      vsVersion: 15.0
-      platform: "$(buildPlatform)"
-      configuration: "$(buildConfiguration)"
+      solution: '$(Parameters.solution)'
+      platform: '$(BuildPlatform)'
+      configuration: '$(BuildConfiguration)'
   - task: VSTest@2
     displayName: "VsTest - testAssemblies"
     inputs:
