@@ -1,0 +1,78 @@
+trigger:
+  - master
+
+pool:
+  vmImage: "windows-latest"
+
+variables:
+  solution: "**/*.sln"
+  buildPlatform: "Any CPU"
+  buildConfiguration: "Release"
+
+steps:
+  - task: gittools.gitversion.gitversion-task.GitVersion@5
+    displayName: GitVersion
+    inputs:
+      additionalArguments: "/output buildserver /nofetch"
+  - task: sebastianlux.UpdateAssemblyInfo.UpdateAssemblyInfo-task.Update AssemblyInfo@1
+    displayName: "Update *AssemblyInfo.cs files: $(Build.SourcesDirectory)"
+    inputs:
+      filePattern: "*AssemblyInfo.cs"
+      assemblyProduct: "Pull Request Monitor"
+      assemblyVersion: "$(GitVersion.AssemblySemVer)"
+      assemblyFileVersion: "$(GitVersion.AssemblySemVer)"
+  - task: NuGetToolInstaller@1
+    displayName: "Use NuGet 4.4.1"
+    inputs:
+      versionSpec: 4.4.1
+  - task: NuGetCommand@2
+    displayName: "NuGet restore"
+    inputs:
+      restoreSolution: "$(Parameters.solution)"
+  - task: VSBuild@1
+    inputs:
+      solution: "$(solution)"
+      platform: "$(buildPlatform)"
+      configuration: "$(buildConfiguration)"
+  - task: VSTest@2
+    displayName: "VsTest - testAssemblies"
+    inputs:
+      testAssemblyVer2: |
+        **\$(BuildConfiguration)\*test*.dll
+        !**\obj\**
+      codeCoverageEnabled: true
+      platform: "$(BuildPlatform)"
+      configuration: "$(BuildConfiguration)"
+      diagnosticsEnabled: True
+  - task: knom.regexreplace-task.regex-replace.RegexReplace@3
+    displayName: "RegEx Find & Replace"
+    inputs:
+      InputSearchPattern: PullRequestMonitor.nuspec
+      FindRegex: "<version>0.1.0</version>"
+      ReplaceRegex: "<version>$(GitVersion.MajorMinorPatch)</version>"
+  - task: NuGetCommand@2
+    displayName: "NuGet pack"
+    inputs:
+      command: pack
+      packagesToPack: PullRequestMonitor.nuspec
+  - task: NuGetCommand@2
+    displayName: "Install Squirrel via NuGet"
+    inputs:
+      command: custom
+      arguments: 'install squirrel.windows -Version 1.8.0 -DirectDownload -OutputDirectory .\squirrel'
+  - script: |
+    $(Build.SourcesDirectory)\squirrel\squirrel.windows.1.8.0\tools\Squirrel.exe --releasify PullRequestMonitor.$(GitVersion.MajorMinorPatch).nupkg
+    
+    workingDirectory: '$(Build.SourcesDirectory)'
+    displayName: 'Run Squirrel'
+  - task: CopyFiles@2
+    displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
+    inputs:
+      SourceFolder: '$(system.defaultworkingdirectory)'
+      Contents: '**\Releases\**'
+      TargetFolder: '$(build.artifactstagingdirectory)'
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish Releases folder'
+    inputs:
+      PathtoPublish: '$(build.artifactstagingdirectory)'
+      ArtifactName: 'Releases.$(GitVersion.MajorMinorPatch)'
