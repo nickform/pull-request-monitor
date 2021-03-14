@@ -7,12 +7,12 @@
     "log4net": "2.0.8",
     "Microsoft.Data.OData": "5.6.1",
     "Microsoft.Data.Services.Client": "5.6.1",
-    "Microsoft.TeamFoundationServer.Client": "16.155.0-preview",
-    "Microsoft.VisualStudio.Services.InteractiveClient": "16.155.0-preview",
+    "Microsoft.TeamFoundationServer.Client": "16.170.0",
+    "Microsoft.VisualStudio.Services.InteractiveClient": "16.170.0",
     "squirrel.windows": "1.8.0"
   },
   "frameworks": {
-    "net461": {}
+    "net48": {}
   },
   "runtimes": {
     "win": {},
