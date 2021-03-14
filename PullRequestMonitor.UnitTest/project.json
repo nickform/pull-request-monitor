@@ -1,14 +1,14 @@
 ﻿{
   "dependencies": {
-    "ApprovalTests": "3.0.13",
-    "AutoFixture": "3.50.2",
-    "AutoFixture.AutoNSubstitute": "3.50.2",
-    "AutoFixture.NUnit3": "3.50.2",
+    "ApprovalTests": "5.4.6",
+    "AutoFixture": "4.15.0",
+    "AutoFixture.AutoNSubstitute": "4.15.0",
+    "AutoFixture.NUnit3": "4.15.0",
     "AutoFixture.NUnit3.AutoDataConnector": "1.0.0.2",
-    "Brutal.Dev.StrongNameSigner": "2.3.0",
-    "NSubstitute": "1.10.0",
-    "NUnit": "3.5.*",
-    "NUnit3TestAdapter": "3.7.0"
+    "Brutal.Dev.StrongNameSigner": "2.7.1",
+    "NSubstitute": "4.2.2",
+    "NUnit": "3.13.1",
+    "NUnit3TestAdapter": "4.0.0-beta.1"
   },
   "frameworks": {
     "net461": {}
