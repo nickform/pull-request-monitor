@@ -110,6 +110,25 @@ namespace PullRequestMonitor.UnitTest.Model
         }
 
         [Test]
+        public void TestTitle_Indicates_IsDraft()
+        {
+            const string testTitle = "Test pull request title";
+            IdentityRefWithVote identityRef = new IdentityRefWithVote();
+            identityRef.Vote = -10;
+            IdentityRefWithVote[] identityRefList = new IdentityRefWithVote[1];
+            identityRefList[0] = identityRef;
+            GitPullRequest gitPullRequest = new GitPullRequest { Title = testTitle };
+            gitPullRequest.IsDraft = true;
+            gitPullRequest.Reviewers = identityRefList;
+            var systemUnderTest =
+                new PullRequest(gitPullRequest,
+                    "server-uri",
+                    _repo);
+
+            Assert.That(systemUnderTest.Title, Does.Contain(" [Draft]"));
+        }
+
+        [Test]
         public void TestCreated_ReturnsCreatedOfImpl()
         {
             var creationDate = DateTime.UtcNow.AddDays(-1);
