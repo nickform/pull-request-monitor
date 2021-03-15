@@ -23,7 +23,6 @@
     <file src="bin\Release\Microsoft.Data.OData.dll" target="lib\net45\"></file>
     <file src="bin\Release\Microsoft.Data.Services.Client.dll" target="lib\net45\"></file>
     <file src="bin\Release\Microsoft.IdentityModel.Clients.ActiveDirectory.dll" target="lib\net45\"></file>
-    <file src="bin\Release\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll" target="lib\net45\"></file>
     <file src="bin\Release\Microsoft.TeamFoundation.Core.WebApi.dll" target="lib\net45\"></file>
     <file src="bin\Release\Microsoft.TeamFoundation.SourceControl.WebApi.dll" target="lib\net45\"></file>
     <file src="bin\Release\Microsoft.VisualStudio.Services.Client.Interactive.dll" target="lib\net45\"></file>
