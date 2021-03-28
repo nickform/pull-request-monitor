@@ -62,11 +62,8 @@ steps:
       command: custom
       arguments: 'install squirrel.windows -Version 1.8.0 -DirectDownload -OutputDirectory .\squirrel'
   - script: |
-      echo DIRECTORY IS GOING TO BE... $(Build.SourcesDirectory)
-      dir .\squirrel\squirrel.windows.1.8.0\tools
-      .\squirrel\squirrel.windows.1.8.0\tools\Squirrel.exe --releasify PullRequestMonitor.$(GitVersion.MajorMinorPatch).nupkg > output.txt
-      type output.txt
-    workingDirectory: '$(Build.SourcesDirectory)'
+      $(Build.SourcesDirectory)\squirrel\squirrel.windows.1.8.0\tools\Squirrel.exe --releasify $(Build.ArtifactStagingDirectory)\PullRequestMonitor.$(GitVersion.MajorMinorPatch).nupkg
+    workingDirectory: $(Build.SourcesDirectory)
     displayName: 'Run Squirrel'
   - task: CopyFiles@2
     displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
