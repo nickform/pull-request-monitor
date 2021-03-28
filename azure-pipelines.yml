@@ -71,6 +71,7 @@ steps:
       echo RUNNING SQUIRREL...
       $(Build.SourcesDirectory)\squirrel\squirrel.windows.1.8.0\tools\Squirrel.exe --releasify PullRequestMonitor.$(GitVersion.MajorMinorPatch).nupkg > output.txt
       echo RE-LISTING SOURCES DIRECTORY...
+      dir $(Build.SourcesDirectory)
       type output.txt
     workingDirectory: $(Build.SourcesDirectory)
     displayName: 'Run Squirrel'
