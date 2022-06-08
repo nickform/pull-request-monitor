@@ -2,6 +2,8 @@
 
 A Windows system tray app to help you keep your team's Azure DevOps pull requests flowing smoothly.
 
+**NOTE: This repository is no longer maintained.**
+
 [![Build Status](https://dev.azure.com/PullRequestMonitor/PullRequestMonitor/_apis/build/status/nickform.pull-request-monitor?branchName=master)](https://dev.azure.com/PullRequestMonitor/PullRequestMonitor/_build/latest?definitionId=2&branchName=master)
 
 ## Introduction
