@@ -81,7 +81,7 @@ namespace PullRequestMonitor.UnitTest
                 if (!handler.ComponentModel.HasClassServices)
                     continue;
 
-                if (handler.ComponentModel.Constructors.IsNullOrEmpty())
+                if (handler.ComponentModel.Constructors == null || !handler.ComponentModel.Constructors.Any())
                 {
                     message.AppendFormat("Cannot construct service {0} due to missing public constructor", handler);
                     message.AppendLine();

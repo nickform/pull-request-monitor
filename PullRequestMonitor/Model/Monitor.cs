@@ -5,7 +5,6 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using Castle.Core.Internal;
 using PullRequestMonitor.Factories;
 using PullRequestMonitor.Services;
 
@@ -22,7 +21,7 @@ namespace PullRequestMonitor.Model
         /// </summary>
         NoProjects,
         /// <summary>
-        /// The last update was succesful.
+        /// The last update was successful.
         /// </summary>
         UpdateSuccessful,
         /// <summary>
@@ -72,7 +71,8 @@ namespace PullRequestMonitor.Model
             _nameRegexpRepositoryFilterFactory = nameRegexpRepositoryFilterFactory;
             _logger = logger;
             _projects = new ConcurrentDictionary<Guid, ITfProject>();
-            Status = _settings.Projects.IsNullOrEmpty() ? MonitorStatus.NoProjects : MonitorStatus.AwaitingFirstUpdate;
+            Status = _settings.Projects == null || !_settings.Projects.Any() ?
+                MonitorStatus.NoProjects : MonitorStatus.AwaitingFirstUpdate;
             _updatesStartedCount = _updatesCompletedCount = 0;
             _updateCountersMutex = new Mutex();
         }
