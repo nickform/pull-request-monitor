@@ -1,6 +1,7 @@
 ﻿using NSubstitute;
 using NUnit.Framework;
 using PullRequestMonitor.ViewModel;
+// ReSharper disable UnusedVariable
 
 namespace PullRequestMonitor.UnitTest.ViewModel
 {

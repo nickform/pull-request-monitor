@@ -12,7 +12,7 @@ namespace PullRequestMonitor.Services
 
         public FileLogger()
         {
-            log4net.GlobalContext.Properties["pid"] = Process.GetCurrentProcess().Id;
+            GlobalContext.Properties["pid"] = Process.GetCurrentProcess().Id;
             _impl = LogManager.GetLogger("FileLogger");
         }
 

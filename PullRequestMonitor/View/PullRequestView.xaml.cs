@@ -22,8 +22,7 @@ namespace PullRequestMonitor.View
         private void UIElement_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             var grid = sender as Grid;
-            var viewModel = grid?.DataContext as PullRequestViewModel;
-            if (viewModel == null) return;
+            if (!(grid?.DataContext is PullRequestViewModel viewModel)) return;
 
             OpenPullRequestWebView(viewModel.WebViewUri.ToString());
         }

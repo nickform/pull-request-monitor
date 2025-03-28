@@ -232,8 +232,7 @@ namespace PullRequestMonitor.Model
 
             foreach (var pullRequestId in toRemove)
             {
-                IPullRequest removed;
-                Unapproved.TryRemove(pullRequestId, out removed);
+                Unapproved.TryRemove(pullRequestId, out var removed);
                 if (removed != null)
                 {
                     _tfsConnection.ReleasePullRequest(removed);

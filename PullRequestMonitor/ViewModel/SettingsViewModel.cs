@@ -109,7 +109,7 @@ namespace PullRequestMonitor.ViewModel
                 // remove it.
                 int? comparisonResult = null;
                 while (existingListIndex < toUpdate.Count &&
-                    (comparisonResult = String.CompareOrdinal(project.Name, toUpdate[existingListIndex].ProjectName)) > 0)
+                    (comparisonResult = string.CompareOrdinal(project.Name, toUpdate[existingListIndex].ProjectName)) > 0)
                 {
                     toUpdate.RemoveAt(existingListIndex);
                     comparisonResult = null;

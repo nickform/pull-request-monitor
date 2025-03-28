@@ -9,6 +9,7 @@ using NUnit.Framework;
 using PullRequestMonitor.Factories;
 using PullRequestMonitor.Model;
 using PullRequestMonitor.ViewModel;
+// ReSharper disable ConvertToConstant.Local
 
 namespace PullRequestMonitor.UnitTest.ViewModel
 {
@@ -326,13 +327,10 @@ namespace PullRequestMonitor.UnitTest.ViewModel
     {
         public int Compare(object x, object y)
         {
-            var xViewModel = x as ProjectViewModel;
-            var yViewModel = y as ProjectViewModel;
-
-            if (xViewModel == null || yViewModel == null)
+            if (!(x is ProjectViewModel xViewModel) || !(y is ProjectViewModel yViewModel))
                 throw new InvalidOperationException($"Can only compare {nameof(ProjectViewModel)}s");
 
-            return String.CompareOrdinal(xViewModel.Id.ToString(), yViewModel.Id.ToString());
+            return string.CompareOrdinal(xViewModel.Id.ToString(), yViewModel.Id.ToString());
         }
     }
 }

@@ -32,6 +32,7 @@ namespace PullRequestMonitor.ViewModel
             set
             {
                 if (value == _model) return;
+
                 if (_model != null) _model.UpdateCompleted -= OnModelUpdateCompleted;
                 _model = value;
                 _model.UpdateCompleted += OnModelUpdateCompleted;
