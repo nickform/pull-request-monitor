@@ -57,7 +57,7 @@ namespace PullRequestMonitor.UnitTest.ViewModel
             Assert.That(systemUnderTest.PullRequests.Count, Is.EqualTo(3));
             foreach (var prViewModel in systemUnderTest.PullRequests)
             {
-                Assert.NotNull(prViewModel.Completed);
+                Assert.That(prViewModel.Completed, Is.Not.Null);
             }
         }
 

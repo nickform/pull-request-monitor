@@ -6,9 +6,9 @@
     "AutoFixture.NUnit3": "3.50.2",
     "AutoFixture.NUnit3.AutoDataConnector": "1.0.0.2",
     "NSubstitute": "1.10.0",
-    "NUnit": "3.5.*",
+    "NUnit": "4.3.2",
     "NUnit.Analyzers": "4.6.0",
-    "NUnit3TestAdapter": "3.7.0"
+    "NUnit3TestAdapter": "5.0.0"
   },
   "frameworks": {
     "net481": {}
