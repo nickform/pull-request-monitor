@@ -316,7 +316,7 @@ namespace PullRequestMonitor.UnitTest.ViewModel
         {
             SettingsViewModel.UpdateProjectViewModels(models, toUpdate);
 
-            CollectionAssert.AreEqual(expectedCollection, toUpdate, new ProjectViewModelComparer(), testCaseName);
+            Assert.That(toUpdate, Is.EqualTo(expectedCollection).Using(new ProjectViewModelComparer()), testCaseName);
         }
     }
 
