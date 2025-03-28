@@ -220,11 +220,13 @@
     <Resource Include="Resources\pulley.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
+
+  <!-- Should not be required, but StrongNameSigner seems not to pick up that Squirrel is a dependency so explicitly sign it -->
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+      <Exec ContinueOnError="false"
+            Command="&quot;$(StrongNameSignerDirectory)StrongNameSigner.Console.exe&quot; -in &quot;$(UserProfile)\.nuget\packages\squirrel.windows&quot;" />
   </Target>
--->
+
   <Target Name="AfterBuild">
     <Copy SourceFiles="@(SquirrelDebugDependencies)" DestinationFolder="$(SolutionDir)\bin" />
   </Target>
