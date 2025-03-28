@@ -290,7 +290,7 @@ namespace PullRequestMonitor.Model
             {
                 RepositoryRetrievalStatus = RetrievalStatus.FailedReasonUnknown;
                 _logger.Error(
-                    $"{nameof(TfProject)}: retrieving respositories in {Name} ({_projectReference.Url}) failed due to one or more unrecognised exceptions:.");
+                    $"{nameof(TfProject)}: retrieving repositories in {Name} ({_projectReference.Url}) failed due to one or more unrecognised exceptions:");
                 var i = 0;
                 foreach (var exception in exceptions)
                 {

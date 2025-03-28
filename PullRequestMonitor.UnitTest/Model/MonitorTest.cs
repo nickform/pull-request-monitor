@@ -50,12 +50,12 @@ namespace PullRequestMonitor.UnitTest.Model
         }
 
         [Test]
-        public void Projects_WhenSettingsHasOneProject_HasOneProject()
+        public async Task Projects_WhenSettingsHasOneProject_HasOneProject()
         {
             var monitoredProjectSettingses = new[] {_aMonitoredProjectSettings};
             _monitorSettings.Projects.Returns(monitoredProjectSettingses);
             var monitor = new Monitor(_monitorSettings, _tfProjectCollectionCache, _nameRegexpRepositoryFilterFactory, _logger);
-            monitor.SyncMonitoredProjects(monitoredProjectSettingses);
+            await monitor.SyncMonitoredProjects(monitoredProjectSettingses);
 
             Assert.That(monitor.Projects.Count(), Is.EqualTo(1));
         }
@@ -79,7 +79,7 @@ namespace PullRequestMonitor.UnitTest.Model
         }
 
         [Test]
-        public void SyncToSettings_ForEachProjectIdentifier_GetsProjectCollectionFromCache()
+        public async Task SyncToSettings_ForEachProjectIdentifier_GetsProjectCollectionFromCache()
         {
             var projectSettingses = new[]
             {
@@ -93,7 +93,7 @@ namespace PullRequestMonitor.UnitTest.Model
             _tfProjectCollectionCache.GetProjectCollection(Arg.Any<string>()).Returns(tfsServer);
             var systemUnderTest = new Monitor(_monitorSettings, _tfProjectCollectionCache, _nameRegexpRepositoryFilterFactory, _logger);
 
-            systemUnderTest.SyncMonitoredProjects(projectSettingses);
+            await systemUnderTest.SyncMonitoredProjects(projectSettingses);
 
             foreach (var projectIdentifier in projectSettingses)
             {
@@ -102,7 +102,7 @@ namespace PullRequestMonitor.UnitTest.Model
         }
 
         [Test]
-        public void SyncToSettings_ForEachProjectIdentifier_GetsProjectFromProjectCollection()
+        public async Task SyncToSettings_ForEachProjectIdentifier_GetsProjectFromProjectCollection()
         {
             var projectSettingses = new[]
             {
@@ -116,7 +116,7 @@ namespace PullRequestMonitor.UnitTest.Model
             _tfProjectCollectionCache.GetProjectCollection(Arg.Any<string>()).Returns(tfsServer);
             var systemUnderTest = new Monitor(_monitorSettings, _tfProjectCollectionCache, _nameRegexpRepositoryFilterFactory, _logger);
 
-            systemUnderTest.SyncMonitoredProjects(projectSettingses);
+            await systemUnderTest.SyncMonitoredProjects(projectSettingses);
 
             foreach (var projectIdentifier in projectSettingses)
             {
@@ -125,7 +125,7 @@ namespace PullRequestMonitor.UnitTest.Model
         }
 
         [Test]
-        public void SyncToSettings_ForEachProjectIdentifierWithNonEmptyRepoNameRegexp_CreatesNameRegexpRepoFilter()
+        public async Task SyncToSettings_ForEachProjectIdentifierWithNonEmptyRepoNameRegexp_CreatesNameRegexpRepoFilter()
         {
             var projectSettingses = new[]
             {
@@ -140,7 +140,7 @@ namespace PullRequestMonitor.UnitTest.Model
             _nameRegexpRepositoryFilterFactory.Create(Arg.Any<string>()).Returns(new NameRegexpRepositoryFilter("*"));
             var systemUnderTest = new Monitor(_monitorSettings, _tfProjectCollectionCache, _nameRegexpRepositoryFilterFactory, _logger);
 
-            systemUnderTest.SyncMonitoredProjects(projectSettingses);
+            await systemUnderTest.SyncMonitoredProjects(projectSettingses);
 
             Assert.That(_nameRegexpRepositoryFilterFactory.ReceivedCalls().Count(),
                 Is.EqualTo(projectSettingses.Count(pi => !string.IsNullOrEmpty(pi.RepoNameRegexp))));
@@ -151,7 +151,7 @@ namespace PullRequestMonitor.UnitTest.Model
         }
 
         [Test]
-        public void SyncToSettings_RemovesRemovedProjects()
+        public async Task SyncToSettings_RemovesRemovedProjects()
         {
             var projectSettingses = new[] { _aMonitoredProjectSettings };
             _monitorSettings.Projects.Returns(projectSettingses);
@@ -160,16 +160,16 @@ namespace PullRequestMonitor.UnitTest.Model
             tfsServer.GetProject(_aMonitoredProjectSettings.Id).Returns(tfProject);
             _tfProjectCollectionCache.GetProjectCollection(Arg.Any<string>()).Returns(tfsServer);
             var systemUnderTest = new Monitor(_monitorSettings, _tfProjectCollectionCache, _nameRegexpRepositoryFilterFactory, _logger);
-            systemUnderTest.SyncMonitoredProjects(projectSettingses);
+
+            await systemUnderTest.SyncMonitoredProjects(projectSettingses);
             Assert.That(systemUnderTest.Projects, Contains.Item(tfProject));
 
-            systemUnderTest.SyncMonitoredProjects(Enumerable.Empty<MonitoredProjectSettings>());
-
+            await systemUnderTest.SyncMonitoredProjects(Enumerable.Empty<MonitoredProjectSettings>());
             Assert.That(systemUnderTest.Projects, Does.Not.Contains(tfProject));
         }
 
         [Test, TestCaseSource(nameof(PullRequestCounts))]
-        public void UnapprovedPullRequestCount_ReturnsNumberOfUnapprovedPullRequests(int pullRequestCount)
+        public async Task UnapprovedPullRequestCount_ReturnsNumberOfUnapprovedPullRequests(int pullRequestCount)
         {
             var projectSettingses = new[] { _aMonitoredProjectSettings };
             _monitorSettings.Projects.Returns(projectSettingses);
@@ -180,13 +180,13 @@ namespace PullRequestMonitor.UnitTest.Model
             _tfProjectCollectionCache.GetProjectCollection(Arg.Any<string>()).Returns(tfsServer);
             var systemUnderTest = new Monitor(_monitorSettings, _tfProjectCollectionCache, _nameRegexpRepositoryFilterFactory, _logger);
 
-            systemUnderTest.SyncMonitoredProjects(projectSettingses);
+            await systemUnderTest.SyncMonitoredProjects(projectSettingses);
 
             Assert.That(systemUnderTest.UnapprovedPullRequestCount, Is.EqualTo(pullRequestCount));
         }
 
         [Test, TestCaseSource(nameof(PullRequestCounts))]
-        public void ApprovedPullRequestCount_ReturnsNumberOfApprovedPullRequests(int pullRequestCount)
+        public async Task ApprovedPullRequestCount_ReturnsNumberOfApprovedPullRequests(int pullRequestCount)
         {
             var projectSettingses = new[] { _aMonitoredProjectSettings };
             _monitorSettings.Projects.Returns(projectSettingses);
@@ -197,7 +197,7 @@ namespace PullRequestMonitor.UnitTest.Model
             _tfProjectCollectionCache.GetProjectCollection(Arg.Any<string>()).Returns(tfsServer);
             var systemUnderTest = new Monitor(_monitorSettings, _tfProjectCollectionCache, _nameRegexpRepositoryFilterFactory, _logger);
 
-            systemUnderTest.SyncMonitoredProjects(projectSettingses);
+            await systemUnderTest.SyncMonitoredProjects(projectSettingses);
 
             Assert.That(systemUnderTest.ApprovedPullRequestCount, Is.EqualTo(pullRequestCount));
         }
