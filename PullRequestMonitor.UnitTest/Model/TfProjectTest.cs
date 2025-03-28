@@ -105,10 +105,12 @@ namespace PullRequestMonitor.UnitTest.Model
         {
             var projectId = Guid.NewGuid();
             var systemUnderTest = new TfProject(new TeamProject { Id = projectId }, _tfsConnection, _logger);
-            var reposFromServer = new List<ITfGitRepository>();
-            reposFromServer.Add(Substitute.For<ITfGitRepository>());
-            reposFromServer.Add(Substitute.For<ITfGitRepository>());
-            reposFromServer.Add(Substitute.For<ITfGitRepository>());
+            var reposFromServer = new List<ITfGitRepository>
+            {
+                Substitute.For<ITfGitRepository>(),
+                Substitute.For<ITfGitRepository>(),
+                Substitute.For<ITfGitRepository>()
+            };
             _tfsConnection.GetRepositoriesInProject(systemUnderTest).Returns(reposFromServer);
             systemUnderTest.RepositoryFilter = null; // For clarity of the test
 
@@ -125,13 +127,17 @@ namespace PullRequestMonitor.UnitTest.Model
         {
             var projectId = Guid.NewGuid();
             var systemUnderTest = new TfProject(new TeamProject { Id = projectId }, _tfsConnection, _logger);
-            var includedRepos = new HashSet<ITfGitRepository>();
-            includedRepos.Add(Substitute.For<ITfGitRepository>());
-            includedRepos.Add(Substitute.For<ITfGitRepository>());
-            includedRepos.Add(Substitute.For<ITfGitRepository>());
-            var excludedRepos = new HashSet<ITfGitRepository>();
-            excludedRepos.Add(Substitute.For<ITfGitRepository>());
-            excludedRepos.Add(Substitute.For<ITfGitRepository>());
+            var includedRepos = new HashSet<ITfGitRepository>
+            {
+                Substitute.For<ITfGitRepository>(),
+                Substitute.For<ITfGitRepository>(),
+                Substitute.For<ITfGitRepository>()
+            };
+            var excludedRepos = new HashSet<ITfGitRepository>
+            {
+                Substitute.For<ITfGitRepository>(),
+                Substitute.For<ITfGitRepository>()
+            };
             var reposFromServer = new List<ITfGitRepository>();
             reposFromServer.AddRange(includedRepos);
             reposFromServer.AddRange(excludedRepos);

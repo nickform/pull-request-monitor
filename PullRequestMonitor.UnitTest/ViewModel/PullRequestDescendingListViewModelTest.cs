@@ -21,8 +21,10 @@ namespace PullRequestMonitor.UnitTest.ViewModel
             var second = Substitute.For<IPullRequest>();
             second.Completed.Returns(DateTime.Today);
             model.AddOrUpdate(1, second, (i, request) => request);
-            var systemUnderTest = new CompletedPullRequestListViewModel();
-            systemUnderTest.Model = model;
+            var systemUnderTest = new CompletedPullRequestListViewModel
+            {
+                Model = model
+            };
             systemUnderTest.Update();
 
             Assert.That(systemUnderTest.PullRequests.Count, Is.EqualTo(2));

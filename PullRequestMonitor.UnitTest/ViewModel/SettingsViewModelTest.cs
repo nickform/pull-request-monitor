@@ -48,9 +48,10 @@ namespace PullRequestMonitor.UnitTest.ViewModel
             var currentProjectId = Guid.NewGuid();
             var appSettings = Substitute.For<IAppSettings>();
             appSettings.ProjectId.Returns(currentProjectId);
-            var systemUnderTest = new SettingsViewModel(appSettings, Substitute.For<ITfProjectCollectionCache>());
-
-            systemUnderTest.SelectedProject = null;
+            var systemUnderTest = new SettingsViewModel(appSettings, Substitute.For<ITfProjectCollectionCache>())
+            {
+                SelectedProject = null
+            };
 
             appSettings.Received().ProjectId = Guid.Empty;
         }
@@ -135,9 +136,10 @@ namespace PullRequestMonitor.UnitTest.ViewModel
         {
             var expectedPattern = "appname-*";
             var appSettings = Substitute.For<IAppSettings>();
-            var systemUnderTest = new SettingsViewModel(appSettings, Substitute.For<ITfProjectCollectionCache>());
-
-            systemUnderTest.RepoNamePattern = expectedPattern;
+            var systemUnderTest = new SettingsViewModel(appSettings, Substitute.For<ITfProjectCollectionCache>())
+            {
+                RepoNamePattern = expectedPattern
+            };
 
             appSettings.Received().RepoNamePattern = expectedPattern;
         }

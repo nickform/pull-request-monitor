@@ -16,8 +16,10 @@ namespace PullRequestMonitor.UnitTest.ViewModel
             var model = new ConcurrentDictionary<int, IPullRequest>();
             model.AddOrUpdate(0, Substitute.For<IPullRequest>(), (i, request) => request);
             model.AddOrUpdate(1, Substitute.For<IPullRequest>(), (i, request) => request);
-            var systemUnderTest = new ActivePullRequestListViewModel();
-            systemUnderTest.Model = model;
+            var systemUnderTest = new ActivePullRequestListViewModel
+            {
+                Model = model
+            };
             systemUnderTest.Update();
 
             Assert.That(systemUnderTest.PullRequests.Count, Is.EqualTo(2));
