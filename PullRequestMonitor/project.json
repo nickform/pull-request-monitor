@@ -1,5 +1,6 @@
 ﻿{
   "dependencies": {
+    "Brutal.Dev.StrongNameSigner": "3.5.0",
     "Castle.Windsor": "6.0.0",
     "Hardcodet.NotifyIcon.Wpf": "2.0.1",
     "Humanizer": "2.14.1",
