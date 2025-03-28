@@ -10,7 +10,7 @@
     "NUnit3TestAdapter": "3.7.0"
   },
   "frameworks": {
-    "net472": {}
+    "net481": {}
   },
   "runtimes": {
     "win": {},
