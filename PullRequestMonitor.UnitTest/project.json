@@ -7,6 +7,7 @@
     "AutoFixture.NUnit3.AutoDataConnector": "1.0.0.2",
     "NSubstitute": "1.10.0",
     "NUnit": "3.5.*",
+    "NUnit.Analyzers": "4.6.0",
     "NUnit3TestAdapter": "3.7.0"
   },
   "frameworks": {
