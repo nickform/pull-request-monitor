@@ -16,6 +16,9 @@
   <PropertyGroup>
     <ApplicationIcon>Resources\pulley.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
   <Import Project="..\vsprops\PullRequestMonitor.props" />
   <ItemGroup>
     <None Include="project.json" />
