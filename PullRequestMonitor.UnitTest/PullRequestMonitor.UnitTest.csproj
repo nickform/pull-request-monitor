@@ -11,6 +11,9 @@
     <AssemblyName>PullRequestMonitor.UnitTest</AssemblyName>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
+  <PropertyGroup>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
   <Import Project="..\vsprops\PullRequestMonitor.props" />
   <ItemGroup>
     <None Include="app.config">

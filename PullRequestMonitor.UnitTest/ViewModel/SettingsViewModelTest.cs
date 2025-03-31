@@ -9,6 +9,7 @@ using NUnit.Framework;
 using PullRequestMonitor.Factories;
 using PullRequestMonitor.Model;
 using PullRequestMonitor.ViewModel;
+// ReSharper disable ConvertToConstant.Local
 
 namespace PullRequestMonitor.UnitTest.ViewModel
 {
@@ -48,9 +49,10 @@ namespace PullRequestMonitor.UnitTest.ViewModel
             var currentProjectId = Guid.NewGuid();
             var appSettings = Substitute.For<IAppSettings>();
             appSettings.ProjectId.Returns(currentProjectId);
-            var systemUnderTest = new SettingsViewModel(appSettings, Substitute.For<ITfProjectCollectionCache>());
-
-            systemUnderTest.SelectedProject = null;
+            var systemUnderTest = new SettingsViewModel(appSettings, Substitute.For<ITfProjectCollectionCache>())
+            {
+                SelectedProject = null
+            };
 
             appSettings.Received().ProjectId = Guid.Empty;
         }
@@ -135,9 +137,10 @@ namespace PullRequestMonitor.UnitTest.ViewModel
         {
             var expectedPattern = "appname-*";
             var appSettings = Substitute.For<IAppSettings>();
-            var systemUnderTest = new SettingsViewModel(appSettings, Substitute.For<ITfProjectCollectionCache>());
-
-            systemUnderTest.RepoNamePattern = expectedPattern;
+            var systemUnderTest = new SettingsViewModel(appSettings, Substitute.For<ITfProjectCollectionCache>())
+            {
+                RepoNamePattern = expectedPattern
+            };
 
             appSettings.Received().RepoNamePattern = expectedPattern;
         }
@@ -316,7 +319,7 @@ namespace PullRequestMonitor.UnitTest.ViewModel
         {
             SettingsViewModel.UpdateProjectViewModels(models, toUpdate);
 
-            CollectionAssert.AreEqual(expectedCollection, toUpdate, new ProjectViewModelComparer(), testCaseName);
+            Assert.That(toUpdate, Is.EqualTo(expectedCollection).Using(new ProjectViewModelComparer()), testCaseName);
         }
     }
 
@@ -324,13 +327,10 @@ namespace PullRequestMonitor.UnitTest.ViewModel
     {
         public int Compare(object x, object y)
         {
-            var xViewModel = x as ProjectViewModel;
-            var yViewModel = y as ProjectViewModel;
-
-            if (xViewModel == null || yViewModel == null)
+            if (!(x is ProjectViewModel xViewModel) || !(y is ProjectViewModel yViewModel))
                 throw new InvalidOperationException($"Can only compare {nameof(ProjectViewModel)}s");
 
-            return String.CompareOrdinal(xViewModel.Id.ToString(), yViewModel.Id.ToString());
+            return string.CompareOrdinal(xViewModel.Id.ToString(), yViewModel.Id.ToString());
         }
     }
 }

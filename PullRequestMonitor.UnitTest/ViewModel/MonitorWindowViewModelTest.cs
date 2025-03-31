@@ -105,8 +105,10 @@ namespace PullRequestMonitor.UnitTest.ViewModel
         {
             var numContentViewModelChanged = 0;
             var pullRequestListViewModel = new ActivePullRequestListViewModel();
-            var singleProjectViewModel = new SingleProjectViewModel(pullRequestListViewModel, pullRequestListViewModel, new CompletedPullRequestListViewModel());
-            singleProjectViewModel.Model = null;
+            var singleProjectViewModel = new SingleProjectViewModel(pullRequestListViewModel, pullRequestListViewModel, new CompletedPullRequestListViewModel())
+            {
+                Model = null
+            };
             var noProjectsViewModel = Substitute.For<INoProjectsViewModel>();
             var tfProject = Substitute.For<ITfProject>();
             tfProject.Approved.Returns(new ConcurrentDictionary<int, IPullRequest>());

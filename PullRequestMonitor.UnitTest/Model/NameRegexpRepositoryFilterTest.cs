@@ -45,7 +45,7 @@ namespace PullRequestMonitor.UnitTest.Model
         [Test]
         public void Test()
         {
-            Assert.True(Regex.IsMatch("repo-name", "repo-"));
+            Assert.That(Regex.IsMatch("repo-name", "repo-"), Is.True);
         }
     }
 }

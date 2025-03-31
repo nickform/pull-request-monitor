@@ -1,18 +1,18 @@
 ﻿{
   "dependencies": {
-    "Brutal.Dev.StrongNameSigner": "2.1.4",
-    "Castle.Windsor": "3.3.0",
-    "Hardcodet.NotifyIcon.Wpf": "1.0.*",
-    "Humanizer": "2.2.0",
-    "log4net": "2.0.8",
-    "Microsoft.Data.OData": "5.6.1",
-    "Microsoft.Data.Services.Client": "5.6.1",
-    "Microsoft.TeamFoundationServer.Client": "16.170.0",
-    "Microsoft.VisualStudio.Services.InteractiveClient": "16.170.0",
-    "squirrel.windows": "1.8.0"
+    "Brutal.Dev.StrongNameSigner": "3.5.0",
+    "Castle.Windsor": "6.0.0",
+    "Hardcodet.NotifyIcon.Wpf": "2.0.1",
+    "Humanizer": "2.14.1",
+    "log4net": "3.0.4",
+    "Microsoft.Data.OData": "5.8.5",
+    "Microsoft.Data.Services.Client": "5.8.5",
+    "Microsoft.TeamFoundationServer.Client": "19.225.1",
+    "Microsoft.VisualStudio.Services.InteractiveClient": "19.225.1",
+    "squirrel.windows": "2.0.1"
   },
   "frameworks": {
-    "net461": {}
+    "net481": {}
   },
   "runtimes": {
     "win": {},

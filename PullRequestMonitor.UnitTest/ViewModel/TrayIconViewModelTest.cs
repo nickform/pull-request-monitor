@@ -69,8 +69,10 @@ namespace PullRequestMonitor.UnitTest.ViewModel
         {
             var trayIcon = Substitute.For<ITrayIcon>();
             trayIcon.MonitorStatus.Returns(monitorStatus);
-            var systemUnderTest = new TrayIconViewModel(Substitute.For<IApplicationActions>());
-            systemUnderTest.Model = trayIcon;
+            var systemUnderTest = new TrayIconViewModel(Substitute.For<IApplicationActions>())
+            {
+                Model = trayIcon
+            };
 
             Assert.That(systemUnderTest.TooltipText, Is.EqualTo(expectedMessage));
         }
@@ -82,8 +84,10 @@ namespace PullRequestMonitor.UnitTest.ViewModel
             trayIcon.MonitorStatus.Returns(MonitorStatus.UpdateSuccessful);
             trayIcon.UnapprovedPullRequestCount.Returns(numUnapprovedPullRequests);
             trayIcon.ApprovedPullRequestCount.Returns(numApprovedPullRequests);
-            var systemUnderTest = new TrayIconViewModel(Substitute.For<IApplicationActions>());
-            systemUnderTest.Model = trayIcon;
+            var systemUnderTest = new TrayIconViewModel(Substitute.For<IApplicationActions>())
+            {
+                Model = trayIcon
+            };
 
             var expectedToolTipText = string.Format(Properties.Resources.PullRequestCountTooltipFormatString,
                 numUnapprovedPullRequests, numApprovedPullRequests);
@@ -146,9 +150,11 @@ namespace PullRequestMonitor.UnitTest.ViewModel
         [Test]
         public void TestOnModelCompleted_RaisesPropertyChangedNotifications()
         {
-            var expectedPropertyNotifications = new HashSet<string>();
-            expectedPropertyNotifications.Add("PullRequestCount");
-            expectedPropertyNotifications.Add("TooltipText");
+            var expectedPropertyNotifications = new HashSet<string>
+            {
+                "PullRequestCount",
+                "TooltipText"
+            };
             var systemUnderTest = new TrayIconViewModel(Substitute.For<IApplicationActions>());
             var trayIcon = Substitute.For<ITrayIcon>();
             systemUnderTest.Model = trayIcon;

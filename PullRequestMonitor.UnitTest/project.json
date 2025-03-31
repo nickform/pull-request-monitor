@@ -5,13 +5,14 @@
     "AutoFixture.AutoNSubstitute": "3.50.2",
     "AutoFixture.NUnit3": "3.50.2",
     "AutoFixture.NUnit3.AutoDataConnector": "1.0.0.2",
-    "Brutal.Dev.StrongNameSigner": "2.1.4",
+    "Brutal.Dev.StrongNameSigner": "3.5.0",
     "NSubstitute": "1.10.0",
-    "NUnit": "3.5.*",
-    "NUnit3TestAdapter": "3.7.0"
+    "NUnit": "4.3.2",
+    "NUnit.Analyzers": "4.6.0",
+    "NUnit3TestAdapter": "5.0.0"
   },
   "frameworks": {
-    "net461": {}
+    "net481": {}
   },
   "runtimes": {
     "win": {},

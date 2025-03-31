@@ -17,7 +17,7 @@ namespace PullRequestMonitor.ViewModel
             Uri bitmapUri;
             var count = value as int?;
 
-            if (count.HasValue && count.Value > 9) count = 9;
+            if (count > 9) count = 9;
 
             switch (count)
             {

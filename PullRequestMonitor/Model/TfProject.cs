@@ -232,8 +232,7 @@ namespace PullRequestMonitor.Model
 
             foreach (var pullRequestId in toRemove)
             {
-                IPullRequest removed;
-                Unapproved.TryRemove(pullRequestId, out removed);
+                Unapproved.TryRemove(pullRequestId, out var removed);
                 if (removed != null)
                 {
                     _tfsConnection.ReleasePullRequest(removed);
@@ -291,7 +290,7 @@ namespace PullRequestMonitor.Model
             {
                 RepositoryRetrievalStatus = RetrievalStatus.FailedReasonUnknown;
                 _logger.Error(
-                    $"{nameof(TfProject)}: retrieving respositories in {Name} ({_projectReference.Url}) failed due to one or more unrecognised exceptions:.");
+                    $"{nameof(TfProject)}: retrieving repositories in {Name} ({_projectReference.Url}) failed due to one or more unrecognised exceptions:");
                 var i = 0;
                 foreach (var exception in exceptions)
                 {

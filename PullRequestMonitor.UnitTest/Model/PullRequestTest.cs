@@ -77,12 +77,17 @@ namespace PullRequestMonitor.UnitTest.Model
         public void TestTitle_Indicates_IsWaitingForAuthor()
         {
             const string testTitle = "Test pull request title";
-            IdentityRefWithVote identityRef = new IdentityRefWithVote();
-            identityRef.Vote = -5;
+            IdentityRefWithVote identityRef = new IdentityRefWithVote
+            {
+                Vote = -5
+            };
             IdentityRefWithVote[] identityRefList = new IdentityRefWithVote[1];
             identityRefList[0] = identityRef;
-            GitPullRequest gitPullRequest = new GitPullRequest {Title = testTitle};
-            gitPullRequest.Reviewers = identityRefList;
+            GitPullRequest gitPullRequest = new GitPullRequest
+            {
+                Title = testTitle,
+                Reviewers = identityRefList
+            };
             var systemUnderTest =
                 new PullRequest(gitPullRequest,
                     "server-uri",
@@ -95,12 +100,17 @@ namespace PullRequestMonitor.UnitTest.Model
         public void TestTitle_Indicates_IsRejected()
         {
             const string testTitle = "Test pull request title";
-            IdentityRefWithVote identityRef = new IdentityRefWithVote();
-            identityRef.Vote = -10;
+            IdentityRefWithVote identityRef = new IdentityRefWithVote
+            {
+                Vote = -10
+            };
             IdentityRefWithVote[] identityRefList = new IdentityRefWithVote[1];
             identityRefList[0] = identityRef;
-            GitPullRequest gitPullRequest = new GitPullRequest { Title = testTitle };
-            gitPullRequest.Reviewers = identityRefList;
+            GitPullRequest gitPullRequest = new GitPullRequest
+            {
+                Title = testTitle,
+                Reviewers = identityRefList
+            };
             var systemUnderTest =
                 new PullRequest(gitPullRequest,
                     "server-uri",
@@ -113,13 +123,18 @@ namespace PullRequestMonitor.UnitTest.Model
         public void TestTitle_Indicates_IsDraft()
         {
             const string testTitle = "Test pull request title";
-            IdentityRefWithVote identityRef = new IdentityRefWithVote();
-            identityRef.Vote = -10;
+            IdentityRefWithVote identityRef = new IdentityRefWithVote
+            {
+                Vote = -10
+            };
             IdentityRefWithVote[] identityRefList = new IdentityRefWithVote[1];
             identityRefList[0] = identityRef;
-            GitPullRequest gitPullRequest = new GitPullRequest { Title = testTitle };
-            gitPullRequest.IsDraft = true;
-            gitPullRequest.Reviewers = identityRefList;
+            GitPullRequest gitPullRequest = new GitPullRequest
+            {
+                Title = testTitle,
+                IsDraft = true,
+                Reviewers = identityRefList
+            };
             var systemUnderTest =
                 new PullRequest(gitPullRequest,
                     "server-uri",

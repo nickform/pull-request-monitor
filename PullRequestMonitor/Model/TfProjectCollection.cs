@@ -94,15 +94,15 @@ namespace PullRequestMonitor.Model
         {
             if (ProjectRetrievalStatus != RetrievalStatus.Suceeded)
             {
-                throw new InvalidOperationException("Cannot get any project until projects have been succesfully retrieved.");
+                throw new InvalidOperationException("Cannot get any project until projects have been successfully retrieved.");
             }
 
-            if (!_projects.ContainsKey(projectId))
+            if (!_projects.TryGetValue(projectId, out var project))
             {
                 return null;
             }
 
-            return _projects[projectId];
+            return project;
         }
 
         private void OnProjectRetrievalCompleted(object sender, EventArgs args)

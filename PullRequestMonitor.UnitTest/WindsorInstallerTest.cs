@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using ApprovalTests;
 using ApprovalTests.Reporters;
-using Castle.Core.Internal;
 using Castle.MicroKernel;
 using Castle.MicroKernel.Handlers;
 using Castle.Windsor;
@@ -22,6 +21,12 @@ namespace PullRequestMonitor.UnitTest
             WindsorContainer.Install(new WindsorInstaller());
         }
 
+        [OneTimeTearDown]
+        public void TearDown()
+        {
+            WindsorContainer.Dispose();
+        }
+
         protected override IWindsorContainer WindsorContainer { get; }
 
         [Test]
@@ -30,7 +35,6 @@ namespace PullRequestMonitor.UnitTest
         {
             CheckPotentiallyMisconfiguredComponentsCore();
         }
-
 
         [Test]
         [UseReporter(typeof(DiffReporter))]
@@ -81,7 +85,7 @@ namespace PullRequestMonitor.UnitTest
                 if (!handler.ComponentModel.HasClassServices)
                     continue;
 
-                if (handler.ComponentModel.Constructors.IsNullOrEmpty())
+                if (handler.ComponentModel.Constructors == null || !handler.ComponentModel.Constructors.Any())
                 {
                     message.AppendFormat("Cannot construct service {0} due to missing public constructor", handler);
                     message.AppendLine();
