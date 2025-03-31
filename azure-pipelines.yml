@@ -2,7 +2,7 @@ trigger:
   - master
 
 pool:
-  vmImage: "vs2017-win2016"
+  vmImage: "windows-latest"
 
 variables:
   solution: "**/*.sln"
@@ -22,9 +22,7 @@ steps:
       assemblyVersion: "$(GitVersion.AssemblySemVer)"
       assemblyFileVersion: "$(GitVersion.AssemblySemVer)"
   - task: NuGetToolInstaller@1
-    displayName: "Use NuGet 4.4.1"
-    inputs:
-      versionSpec: 4.4.1
+    displayName: "Install NuGet"
   - task: NuGetCommand@2
     displayName: "NuGet restore"
     inputs:
@@ -60,9 +58,9 @@ steps:
     displayName: "Install Squirrel via NuGet"
     inputs:
       command: custom
-      arguments: 'install squirrel.windows -Version 1.8.0 -DirectDownload -OutputDirectory .\squirrel'
+      arguments: 'install squirrel.windows -Version 2.0.1 -DirectDownload -OutputDirectory .\squirrel'
   - script: |
-      $(Build.SourcesDirectory)\squirrel\squirrel.windows.1.8.0\tools\Squirrel.exe --releasify $(Build.ArtifactStagingDirectory)\PullRequestMonitor.$(GitVersion.MajorMinorPatch).nupkg
+      $(Build.SourcesDirectory)\squirrel\squirrel.windows.2.0.1\tools\Squirrel.exe --releasify $(Build.ArtifactStagingDirectory)\PullRequestMonitor.$(GitVersion.MajorMinorPatch).nupkg
     workingDirectory: $(Build.SourcesDirectory)
     displayName: 'Run Squirrel'
   - task: CopyFiles@2
